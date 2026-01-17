@@ -107,38 +107,38 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ING-01 | TBD | Pending |
-| ING-02 | TBD | Pending |
-| ING-03 | TBD | Pending |
-| EXT-01 | TBD | Pending |
-| EXT-02 | TBD | Pending |
-| EXT-03 | TBD | Pending |
-| EXT-04 | TBD | Pending |
-| EXT-05 | TBD | Pending |
-| IDN-01 | TBD | Pending |
-| IDN-02 | TBD | Pending |
-| IDN-03 | TBD | Pending |
-| IDN-04 | TBD | Pending |
-| OUT-01 | TBD | Pending |
-| OUT-02 | TBD | Pending |
-| OUT-03 | TBD | Pending |
-| OUT-04 | TBD | Pending |
-| OUT-05 | TBD | Pending |
-| XMT-01 | TBD | Pending |
-| XMT-02 | TBD | Pending |
-| PRP-01 | TBD | Pending |
-| PRP-02 | TBD | Pending |
-| PRP-03 | TBD | Pending |
-| COM-01 | TBD | Pending |
-| COM-02 | TBD | Pending |
-| COM-03 | TBD | Pending |
-| COM-04 | TBD | Pending |
+| ING-01 | Phase 2 | Pending |
+| ING-02 | Phase 2 | Pending |
+| ING-03 | Phase 2 | Pending |
+| EXT-01 | Phase 3 | Pending |
+| EXT-02 | Phase 3 | Pending |
+| EXT-03 | Phase 3 | Pending |
+| EXT-04 | Phase 3 | Pending |
+| EXT-05 | Phase 3 | Pending |
+| IDN-01 | Phase 4 | Pending |
+| IDN-02 | Phase 4 | Pending |
+| IDN-03 | Phase 4 | Pending |
+| IDN-04 | Phase 4 | Pending |
+| OUT-01 | Phase 5 | Pending |
+| OUT-02 | Phase 5 | Pending |
+| OUT-03 | Phase 6 | Pending |
+| OUT-04 | Phase 6 | Pending |
+| OUT-05 | Phase 5 | Pending |
+| XMT-01 | Phase 7 | Pending |
+| XMT-02 | Phase 7 | Pending |
+| PRP-01 | Phase 8 | Pending |
+| PRP-02 | Phase 8 | Pending |
+| PRP-03 | Phase 8 | Pending |
+| COM-01 | Phase 9 | Pending |
+| COM-02 | Phase 9 | Pending |
+| COM-03 | Phase 9 | Pending |
+| COM-04 | Phase 9 | Pending |
 
 **Coverage:**
 - v1 requirements: 26 total
-- Mapped to phases: 0
-- Unmapped: 26 (pending roadmap creation)
+- Mapped to phases: 26
+- Unmapped: 0
 
 ---
 *Requirements defined: 2025-01-17*
-*Last updated: 2025-01-17 after initial definition*
+*Last updated: 2025-01-17 after roadmap creation*
