@@ -1,0 +1,144 @@
+# Requirements: TPM Admin Agent
+
+**Defined:** 2025-01-17
+**Core Value:** Convert meeting talk into tracked execution artifacts automatically — so TPMs shift from clerical work to strategic orchestration.
+
+## v1 Requirements
+
+Requirements for initial release. Each maps to roadmap phases.
+
+### Ingestion
+
+- [ ] **ING-01**: User can upload Zoom transcript file
+- [ ] **ING-02**: System parses VTT/SRT transcript formats
+- [ ] **ING-03**: System identifies speakers (diarization)
+
+### Extraction
+
+- [ ] **EXT-01**: System extracts action items with owner, due date, description
+- [ ] **EXT-02**: System extracts decisions with context and rationale
+- [ ] **EXT-03**: System extracts risks with severity level
+- [ ] **EXT-04**: System extracts issues with status
+- [ ] **EXT-05**: System provides confidence score for each extraction
+
+### Identity Resolution
+
+- [ ] **IDN-01**: System matches names to project roster spreadsheet
+- [ ] **IDN-02**: System cross-references Slack channel membership
+- [ ] **IDN-03**: System cross-references Google Calendar attendees
+- [ ] **IDN-04**: System flags low-confidence matches for human review
+
+### Output
+
+- [ ] **OUT-01**: System generates meeting minutes from template
+- [ ] **OUT-02**: User can select target system (Google Sheets, Smartsheet, Jira)
+- [ ] **OUT-03**: System creates rows/items in selected target for action items, risks, issues
+- [ ] **OUT-04**: System notifies owners of assigned items
+- [ ] **OUT-05**: Architecture uses adapter pattern for integrations
+
+### Cross-Meeting Intelligence
+
+- [ ] **XMT-01**: User can search across past meeting content
+- [ ] **XMT-02**: System tracks open items across multiple meetings
+
+### Meeting Prep
+
+- [ ] **PRP-01**: System surfaces open items from previous meetings before meeting starts
+- [ ] **PRP-02**: System surfaces relevant context from docs/Slack related to meeting agenda
+- [ ] **PRP-03**: System delivers prep summary 10 minutes before meeting
+
+### Communication Automation
+
+- [ ] **COM-01**: System drafts status updates formatted for exec audience
+- [ ] **COM-02**: System drafts status updates formatted for team detail
+- [ ] **COM-03**: System generates escalation emails with facts, impact, and ask
+- [ ] **COM-04**: System generates exec talking points for reviews
+
+## v2 Requirements
+
+Deferred to future release. Tracked but not in current roadmap.
+
+### Automation
+
+- **AUT-01**: Zoom webhook triggers processing automatically (no manual upload)
+- **AUT-02**: Voice-to-identity learning improves over time
+
+### Real-Time Intelligence
+
+- **RTI-01**: System surfaces context cards during live meetings
+- **RTI-02**: System shows running action item list during meeting
+
+### Proactive Intelligence
+
+- **PRO-01**: System alerts on action items approaching due date
+- **PRO-02**: System alerts on parked decisions not revisited
+- **PRO-03**: System alerts on risks logged without mitigation
+- **PRO-04**: System detects patterns across projects
+- **PRO-05**: System tracks stakeholder signals (sentiment, silence, escalation language)
+- **PRO-06**: System tracks capacity/load across assignees
+- **PRO-07**: System prevents decision amnesia by surfacing past decisions
+
+### Extended Ingest
+
+- **EXI-01**: System processes email threads for extraction
+- **EXI-02**: System processes Slack conversations for extraction
+
+## Out of Scope
+
+Explicitly excluded. Documented to prevent scope creep.
+
+| Feature | Reason |
+|---------|--------|
+| Transcription | Zoom provides; commodity feature |
+| Recording bots | Complex, not differentiated |
+| Video storage | Storage cost, not core value |
+| Calendar/scheduling | Adjacent domain |
+| CRM features | Not TPM workflow |
+| Sentiment analysis | Low signal-to-noise for TPM use case |
+| Timeline intelligence | Future, not v2 |
+| Relationship mapping | Future, not v2 |
+| Predictive health scoring | Future, not v2 |
+| Handoff/onboarding generation | Future, not v2 |
+| TPM Director/VP Agents | Future, requires v1 foundation |
+
+## Traceability
+
+Which phases cover which requirements. Updated during roadmap creation.
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| ING-01 | TBD | Pending |
+| ING-02 | TBD | Pending |
+| ING-03 | TBD | Pending |
+| EXT-01 | TBD | Pending |
+| EXT-02 | TBD | Pending |
+| EXT-03 | TBD | Pending |
+| EXT-04 | TBD | Pending |
+| EXT-05 | TBD | Pending |
+| IDN-01 | TBD | Pending |
+| IDN-02 | TBD | Pending |
+| IDN-03 | TBD | Pending |
+| IDN-04 | TBD | Pending |
+| OUT-01 | TBD | Pending |
+| OUT-02 | TBD | Pending |
+| OUT-03 | TBD | Pending |
+| OUT-04 | TBD | Pending |
+| OUT-05 | TBD | Pending |
+| XMT-01 | TBD | Pending |
+| XMT-02 | TBD | Pending |
+| PRP-01 | TBD | Pending |
+| PRP-02 | TBD | Pending |
+| PRP-03 | TBD | Pending |
+| COM-01 | TBD | Pending |
+| COM-02 | TBD | Pending |
+| COM-03 | TBD | Pending |
+| COM-04 | TBD | Pending |
+
+**Coverage:**
+- v1 requirements: 26 total
+- Mapped to phases: 0
+- Unmapped: 26 (pending roadmap creation)
+
+---
+*Requirements defined: 2025-01-17*
+*Last updated: 2025-01-17 after initial definition*
