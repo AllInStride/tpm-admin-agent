@@ -32,12 +32,12 @@ This roadmap delivers a Meeting-to-Execution Agent that converts Zoom transcript
   3. Event store persists all events with append-only guarantees
   4. FastAPI application starts and responds to health checks
   5. Test harness runs and validates event flow
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: Project scaffolding and core dependencies
-- [ ] 01-02: Canonical data models with Pydantic
-- [ ] 01-03: Event bus and event store
+- [ ] 01-01-PLAN.md — Project scaffolding with uv, FastAPI, and health endpoints
+- [ ] 01-02-PLAN.md — Canonical data models (Meeting, Participant, ActionItem, Decision, Risk, Issue)
+- [ ] 01-03-PLAN.md — Event bus and event store infrastructure
 
 ### Phase 2: Transcript Ingestion
 **Goal**: User can upload a Zoom transcript and system parses it into structured meeting data
@@ -174,7 +174,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/3 | Not started | - |
+| 1. Foundation | 0/3 | Planned | - |
 | 2. Transcript Ingestion | 0/3 | Not started | - |
 | 3. RAID Extraction | 0/4 | Not started | - |
 | 4. Identity Resolution | 0/3 | Not started | - |
@@ -186,5 +186,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 
 ---
 *Roadmap created: 2025-01-17*
+*Phase 1 planned: 2025-01-17*
 *Total plans: 29*
 *Total v1 requirements: 26 (100% coverage)*
