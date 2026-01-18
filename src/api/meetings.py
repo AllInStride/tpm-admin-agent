@@ -1,9 +1,15 @@
 """Meetings API endpoints for transcript upload and processing."""
 
+from datetime import UTC, datetime
 from pathlib import Path
 
-from fastapi import APIRouter, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, HTTPException, Request, UploadFile
 from pydantic import BaseModel
+
+from src.events.bus import EventBus
+from src.events.types import MeetingCreated, TranscriptParsed
+from src.models.meeting import Meeting
+from src.services.transcript_parser import TranscriptParser
 
 # Constants
 ALLOWED_EXTENSIONS = {".vtt", ".srt"}
@@ -12,13 +18,20 @@ MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024  # 10 MB
 router = APIRouter(prefix="/meetings", tags=["meetings"])
 
 
-class UploadResponse(BaseModel):
-    """Response model for successful transcript upload."""
+class MeetingResponse(BaseModel):
+    """Response model for successful transcript upload with meeting details."""
 
-    status: str
-    filename: str
-    size: int
-    format: str
+    id: str
+    title: str
+    date: datetime
+    speaker_count: int
+    utterance_count: int
+    duration_seconds: float | None
+
+
+def get_event_bus(request: Request) -> EventBus:
+    """Dependency to get EventBus from app state."""
+    return request.app.state.event_bus
 
 
 async def validate_transcript_file(file: UploadFile) -> tuple[str, str]:
@@ -79,27 +92,77 @@ async def validate_transcript_file(file: UploadFile) -> tuple[str, str]:
     return content, ext
 
 
-@router.post("/upload", response_model=UploadResponse)
-async def upload_transcript(file: UploadFile) -> UploadResponse:
+@router.post("/upload", response_model=MeetingResponse)
+async def upload_transcript(
+    file: UploadFile,
+    event_bus: EventBus = Depends(get_event_bus),
+) -> MeetingResponse:
     """Upload a transcript file for processing.
 
-    Accepts VTT or SRT transcript files and validates them for processing.
-    The actual parsing will be wired in Plan 02-03.
+    Accepts VTT or SRT transcript files, parses them into structured data,
+    creates a Meeting, and emits events for persistence.
 
     Args:
         file: The transcript file (VTT or SRT format).
+        event_bus: EventBus instance from app state.
 
     Returns:
-        UploadResponse with validation status, filename, size, and format.
+        MeetingResponse with meeting ID, title, speaker count, utterance count.
 
     Raises:
         HTTPException: For validation failures (400, 413, 415).
     """
     content, ext = await validate_transcript_file(file)
 
-    return UploadResponse(
-        status="validated",
-        filename=file.filename or "unknown",
-        size=len(content),
-        format=ext,
+    # Parse the transcript
+    parser = TranscriptParser()
+    try:
+        parsed = parser.parse(content, ext)
+    except Exception as e:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Failed to parse transcript: {e!s}",
+        )
+
+    # Create Meeting from parsed data
+    meeting = Meeting(
+        title=Path(file.filename or "untitled")
+        .stem.replace("_", " ")
+        .replace("-", " "),
+        date=datetime.now(UTC),
+        utterances=parsed.utterances,
+        duration_minutes=int(parsed.duration_seconds / 60)
+        if parsed.duration_seconds
+        else None,
+        transcript_source="zoom",
+        transcript_file=file.filename,
+    )
+
+    # Emit and persist events
+    await event_bus.publish_and_store(
+        MeetingCreated(
+            aggregate_id=meeting.id,
+            title=meeting.title,
+            meeting_date=meeting.date,
+            participant_count=len(parsed.speakers),
+            transcript_filename=file.filename,
+        )
+    )
+
+    await event_bus.publish_and_store(
+        TranscriptParsed(
+            aggregate_id=meeting.id,
+            utterance_count=len(parsed.utterances),
+            speaker_count=len(parsed.speakers),
+            duration_seconds=parsed.duration_seconds,
+        )
+    )
+
+    return MeetingResponse(
+        id=str(meeting.id),
+        title=meeting.title,
+        date=meeting.date,
+        speaker_count=len(parsed.speakers),
+        utterance_count=len(parsed.utterances),
+        duration_seconds=parsed.duration_seconds,
     )
