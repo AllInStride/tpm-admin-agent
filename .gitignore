@@ -42,6 +42,9 @@ htmlcov/
 .mypy_cache/
 .ruff_cache/
 
+# Local databases
+*.db
+
 # OS
 .DS_Store
 Thumbs.db

@@ -34,3 +34,4 @@ async def test_readiness(client: AsyncClient) -> None:
     assert data["status"] == "ready"
     assert "checks" in data
     assert data["checks"]["api"] == "ok"
+    assert data["checks"]["database"] == "ok"

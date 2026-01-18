@@ -2,7 +2,7 @@
 
 from datetime import UTC, datetime
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from pydantic import BaseModel
 
 from src.config import settings
@@ -50,14 +50,25 @@ async def liveness() -> LivenessResponse:
 
 
 @router.get("/ready", response_model=ReadinessResponse)
-async def readiness() -> ReadinessResponse:
+async def readiness(request: Request) -> ReadinessResponse:
     """Readiness probe - app can serve traffic.
 
-    Note: Database check will be added in Plan 03 when event store is implemented.
+    Checks:
+    - API is responding
+    - Database is connected and healthy
     """
-    checks = {
-        "api": "ok",
-        # "database": "ok" - added in Plan 03
-    }
+    checks: dict[str, str] = {"api": "ok"}
+
+    # Check database if available
+    db = getattr(request.app.state, "db", None)
+    if db:
+        try:
+            is_healthy = await db.is_healthy()
+            checks["database"] = "ok" if is_healthy else "failed"
+        except Exception:
+            checks["database"] = "failed"
+    else:
+        checks["database"] = "not_configured"
+
     status = "ready" if all(v == "ok" for v in checks.values()) else "not_ready"
     return ReadinessResponse(status=status, checks=checks)
