@@ -6,6 +6,14 @@ This module provides:
 - Schemas for roster entries and resolution results
 """
 
+from src.identity.confidence import calculate_confidence
+from src.identity.fuzzy_matcher import FuzzyMatcher
 from src.identity.schemas import ResolutionResult, ResolutionSource, RosterEntry
 
-__all__ = ["RosterEntry", "ResolutionResult", "ResolutionSource"]
+__all__ = [
+    "FuzzyMatcher",
+    "ResolutionResult",
+    "ResolutionSource",
+    "RosterEntry",
+    "calculate_confidence",
+]
