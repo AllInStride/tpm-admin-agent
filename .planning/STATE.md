@@ -5,32 +5,33 @@
 See: .planning/PROJECT.md (updated 2025-01-17)
 
 **Core value:** Convert meeting talk into tracked execution artifacts automatically — so TPMs shift from clerical work to strategic orchestration.
-**Current focus:** Phase 2 Complete - Ready for Phase 3 (Artifact Extraction)
+**Current focus:** Phase 3 - RAID Extraction (in progress)
 
 ## Current Position
 
-Phase: 2 of 9 (Transcript Ingestion) - COMPLETE
-Plan: 3 of 3 in current phase
-Status: Phase complete
-Last activity: 2026-01-18 - Completed 02-03-PLAN.md
+Phase: 3 of 9 (RAID Extraction)
+Plan: 2 of 4 in current phase
+Status: In progress
+Last activity: 2026-01-18 - Completed 03-02-PLAN.md
 
-Progress: [===.......] 11%
+Progress: [====......] 15%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 3.5 min
-- Total execution time: 11 min
+- Total plans completed: 5
+- Average duration: 3.4 min
+- Total execution time: 17 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 02 | 3/3 | 11 min | 3.7 min |
+| 03 | 2/4 | 6 min | 3.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (2 min), 02-02 (5 min), 02-03 (4 min)
+- Last 5 plans: 02-02 (5 min), 02-03 (4 min), 03-01 (3 min), 03-02 (3 min)
 - Trend: Stable execution pace
 
 *Updated after each plan completion*
@@ -47,6 +48,10 @@ Progress: [===.......] 11%
 | 02-02 | Accept integer-second timestamps | webvtt-py library limitation |
 | 02-03 | Mock EventBus with AsyncMock for tests | Verify event emission without persistence |
 | 02-03 | Combined commit for endpoint + tests | Pre-commit hook requires tests to pass |
+| 03-02 | Instructions after transcript in prompts | Lost-in-middle mitigation per Anthropic research |
+| 03-02 | 3-tier confidence rubric (0.9/0.7/0.5) | Calibrate LLM confidence with explicit examples |
+| 03-02 | 0.5 minimum extraction threshold | Below this is too uncertain for TPM workflows |
+| 03-02 | Separate prompts per RAID type | Better precision than single mega-prompt |
 
 ### Pending Todos
 
@@ -56,17 +61,17 @@ None yet.
 
 None yet.
 
-## Phase 2 Completion Summary
+## Phase 3 Progress
 
-Phase 2: Transcript Ingestion is now complete. All success criteria met:
+Phase 3: RAID Extraction in progress.
 
-- [x] POST /meetings/upload accepts VTT/SRT files (02-01)
-- [x] TranscriptParser extracts utterances and speakers (02-02)
-- [x] Upload endpoint creates Meeting and emits events (02-03)
-- [x] MeetingCreated and TranscriptParsed events persisted (02-03)
+- [x] Extraction schemas for LLM output (03-01)
+- [x] RAID extraction prompts with confidence rubrics (03-02)
+- [ ] RAIDExtractor service with LLM client (03-03)
+- [ ] Extraction endpoint and event emission (03-04)
 
 ## Session Continuity
 
-Last session: 2026-01-18T05:37:15Z
-Stopped at: Completed 02-03-PLAN.md (Phase 2 complete)
+Last session: 2026-01-18T21:08:56Z
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None
