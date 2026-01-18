@@ -5,33 +5,33 @@
 See: .planning/PROJECT.md (updated 2025-01-17)
 
 **Core value:** Convert meeting talk into tracked execution artifacts automatically — so TPMs shift from clerical work to strategic orchestration.
-**Current focus:** Phase 3 - RAID Extraction (in progress)
+**Current focus:** Phase 3 - RAID Extraction (complete)
 
 ## Current Position
 
 Phase: 3 of 9 (RAID Extraction)
-Plan: 3 of 4 in current phase complete
-Status: In progress
-Last activity: 2026-01-18 - Completed 03-03-PLAN.md
+Plan: 4 of 4 in current phase complete
+Status: Phase complete
+Last activity: 2026-01-18 - Completed 03-04-PLAN.md
 
-Progress: [======....] 21%
+Progress: [=======...] 25%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
-- Average duration: 3.5 min
-- Total execution time: 21 min
+- Total plans completed: 7
+- Average duration: 3.6 min
+- Total execution time: 25 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 02 | 3/3 | 11 min | 3.7 min |
-| 03 | 3/4 | 10 min | 3.3 min |
+| 03 | 4/4 | 14 min | 3.5 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-03 (4 min), 03-02 (3 min), 03-01 (6 min), 03-03 (4 min)
+- Last 5 plans: 03-01 (6 min), 03-02 (3 min), 03-03 (4 min), 03-04 (4 min)
 - Trend: Stable execution pace
 
 *Updated after each plan completion*
@@ -58,6 +58,9 @@ Progress: [======....] 21%
 | 03-03 | Sequential extraction (not parallel) | Avoid LLM rate limits |
 | 03-03 | Error isolation per extraction type | Failed extraction returns [], doesn't stop others |
 | 03-03 | Confidence filtering uses >= threshold | Inclusive comparison at boundary |
+| 03-04 | Extraction accepts transcript in request body | MVP approach; later will fetch from event store |
+| 03-04 | Confidence threshold via query param | Per-request customization without changing service |
+| 03-04 | Event emission order: items then summary | MeetingProcessed emitted after all item events |
 
 ### Pending Todos
 
@@ -69,15 +72,15 @@ None yet.
 
 ## Phase 3 Progress
 
-Phase 3: RAID Extraction in progress.
+Phase 3: RAID Extraction complete.
 
 - [x] Extraction schemas for LLM output (03-01)
 - [x] RAID extraction prompts with confidence rubrics (03-02)
 - [x] RAIDExtractor service with LLM client (03-03)
-- [ ] Extraction endpoint and event emission (03-04)
+- [x] Extraction endpoint and event emission (03-04)
 
 ## Session Continuity
 
-Last session: 2026-01-18T21:16:20Z
-Stopped at: Completed 03-03-PLAN.md
+Last session: 2026-01-18T21:21:31Z
+Stopped at: Completed 03-04-PLAN.md (Phase 3 complete)
 Resume file: None
