@@ -51,7 +51,7 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Upload endpoint with file validation (Wave 1)
+- [x] 02-01-PLAN.md — Upload endpoint with file validation (Wave 1)
 - [ ] 02-02-PLAN.md — VTT/SRT parser with speaker diarization (Wave 1)
 - [ ] 02-03-PLAN.md — Meeting event emission and persistence (Wave 2)
 
@@ -175,7 +175,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 0/3 | Planned | - |
-| 2. Transcript Ingestion | 0/3 | Planned | - |
+| 2. Transcript Ingestion | 1/3 | In progress | - |
 | 3. RAID Extraction | 0/4 | Not started | - |
 | 4. Identity Resolution | 0/3 | Not started | - |
 | 5. Output Generation | 0/3 | Not started | - |
