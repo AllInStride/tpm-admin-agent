@@ -4,6 +4,8 @@ version = "0.1.0"
 description = "Meeting intelligence automation for TPMs - extracts action items, decisions, risks from meeting transcripts"
 requires-python = ">=3.11"
 dependencies = [
+    "anthropic>=0.76.0",
+    "dateparser>=1.2.2",
     "email-validator>=2.3.0",
     "fastapi>=0.128.0",
     "libsql-client>=0.3.1",

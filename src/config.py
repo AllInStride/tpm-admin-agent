@@ -19,6 +19,16 @@ class Settings(BaseSettings):
     turso_database_url: str | None = Field(default=None)
     turso_auth_token: str | None = Field(default=None)
 
+    # Anthropic (LLM for RAID extraction)
+    anthropic_api_key: str | None = Field(default=None)
+    anthropic_model: str = Field(default="claude-sonnet-4-5")
+    extraction_confidence_threshold: float = Field(
+        default=0.5,
+        ge=0.0,
+        le=1.0,
+        description="Minimum confidence score to include extracted items",
+    )
+
     model_config = {
         "env_file": ".env",
         "env_file_encoding": "utf-8",
