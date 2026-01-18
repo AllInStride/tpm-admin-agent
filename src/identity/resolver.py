@@ -5,12 +5,25 @@ Resolution pipeline (in order):
 2. Learned mapping lookup (O(1) with index)
 3. Fuzzy match (O(n) Jaro-Winkler)
 4. LLM inference (for ambiguous cases)
+
+Multi-source verification:
+- Slack workspace membership
+- Google Calendar event attendees
 """
 
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+from src.identity.confidence import calculate_confidence
 from src.identity.fuzzy_matcher import FuzzyMatcher
 from src.identity.llm_matcher import LLMMatcher
 from src.identity.schemas import ResolutionResult, ResolutionSource, RosterEntry
 from src.repositories.mapping_repo import MappingRepository
+
+if TYPE_CHECKING:
+    from src.adapters.calendar_adapter import CalendarAdapter
+    from src.adapters.slack_adapter import SlackAdapter
 
 
 class IdentityResolver:
@@ -21,6 +34,10 @@ class IdentityResolver:
     2. Learned mapping lookup (O(1) with index)
     3. Fuzzy match (O(n) Jaro-Winkler)
     4. LLM inference (for ambiguous cases)
+
+    Optional multi-source verification:
+    - SlackAdapter: verify workspace membership
+    - CalendarAdapter: verify event attendance
     """
 
     def __init__(
@@ -28,6 +45,8 @@ class IdentityResolver:
         fuzzy_matcher: FuzzyMatcher,
         mapping_repo: MappingRepository,
         llm_matcher: LLMMatcher | None = None,
+        slack_adapter: SlackAdapter | None = None,
+        calendar_adapter: CalendarAdapter | None = None,
         auto_accept_threshold: float = 0.85,
     ):
         """Initialize resolver with required components.
@@ -36,11 +55,15 @@ class IdentityResolver:
             fuzzy_matcher: Fuzzy name matching service
             mapping_repo: Repository for learned mappings
             llm_matcher: Optional LLM matcher for ambiguous cases
+            slack_adapter: Optional Slack adapter for member verification
+            calendar_adapter: Optional Calendar adapter for attendee verification
             auto_accept_threshold: Confidence threshold for auto-accept (default 0.85)
         """
         self._fuzzy = fuzzy_matcher
         self._mappings = mapping_repo
         self._llm = llm_matcher
+        self._slack = slack_adapter
+        self._calendar = calendar_adapter
         self._threshold = auto_accept_threshold
 
     async def resolve(
@@ -48,16 +71,24 @@ class IdentityResolver:
         transcript_name: str,
         roster: list[RosterEntry],
         project_id: str,
+        calendar_id: str | None = None,
+        calendar_event_id: str | None = None,
     ) -> ResolutionResult:
         """Resolve a transcript name to roster entry.
 
         Tries stages in order: exact -> learned -> fuzzy -> LLM.
         Returns first match above threshold or flags for review.
 
+        Multi-source verification is applied when adapters are configured:
+        - Slack: verifies workspace membership
+        - Calendar: verifies event attendance
+
         Args:
             transcript_name: Name as it appeared in transcript
             roster: Project roster entries
             project_id: Project ID for learned mappings
+            calendar_id: Optional calendar ID for attendee verification
+            calendar_event_id: Optional event ID for attendee verification
 
         Returns:
             ResolutionResult with match or requires_review=True
@@ -92,16 +123,36 @@ class IdentityResolver:
         alternatives = self._fuzzy.find_top_matches(transcript_name, roster, limit=3)
 
         if match and score >= self._threshold:
+            # Apply multi-source verification
+            slack_verified = False
+            calendar_verified = False
+
+            if self._slack:
+                slack_verified = await self._slack.verify_member(match.email)
+
+            if self._calendar and calendar_id and calendar_event_id:
+                calendar_verified = await self._calendar.verify_attendee(
+                    calendar_id, calendar_event_id, match.email
+                )
+
+            # Calculate boosted confidence
+            final_confidence = calculate_confidence(
+                fuzzy_score=score,
+                roster_match=True,
+                slack_match=slack_verified,
+                calendar_match=calendar_verified,
+            )
+
             return ResolutionResult(
                 transcript_name=transcript_name,
                 resolved_email=match.email,
                 resolved_name=match.name,
-                confidence=min(score, 0.85),  # Single-source cap
+                confidence=final_confidence,
                 source=ResolutionSource.FUZZY,
                 alternatives=[
                     (e.name, s) for e, s in alternatives if e.email != match.email
                 ],
-                requires_review=False,
+                requires_review=final_confidence < self._threshold,
             )
 
         # Stage 4: LLM inference (if available and fuzzy gave candidates)
@@ -150,6 +201,8 @@ class IdentityResolver:
         names: list[str],
         roster: list[RosterEntry],
         project_id: str,
+        calendar_id: str | None = None,
+        calendar_event_id: str | None = None,
     ) -> list[ResolutionResult]:
         """Resolve multiple names.
 
@@ -157,11 +210,16 @@ class IdentityResolver:
             names: List of transcript names to resolve
             roster: Project roster entries
             project_id: Project ID for learned mappings
+            calendar_id: Optional calendar ID for attendee verification
+            calendar_event_id: Optional event ID for attendee verification
 
         Returns:
             List of resolution results in same order as names
         """
-        return [await self.resolve(name, roster, project_id) for name in names]
+        return [
+            await self.resolve(name, roster, project_id, calendar_id, calendar_event_id)
+            for name in names
+        ]
 
     async def learn_mapping(
         self,
