@@ -23,10 +23,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Identity Resolution
 
-- [ ] **IDN-01**: System matches names to project roster spreadsheet
-- [ ] **IDN-02**: System cross-references Slack channel membership
-- [ ] **IDN-03**: System cross-references Google Calendar attendees
-- [ ] **IDN-04**: System flags low-confidence matches for human review
+- [x] **IDN-01**: System matches names to project roster spreadsheet
+- [x] **IDN-02**: System cross-references Slack channel membership
+- [x] **IDN-03**: System cross-references Google Calendar attendees
+- [x] **IDN-04**: System flags low-confidence matches for human review
 
 ### Output
 
@@ -115,10 +115,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | EXT-03 | Phase 3 | Complete |
 | EXT-04 | Phase 3 | Complete |
 | EXT-05 | Phase 3 | Complete |
-| IDN-01 | Phase 4 | Pending |
-| IDN-02 | Phase 4 | Pending |
-| IDN-03 | Phase 4 | Pending |
-| IDN-04 | Phase 4 | Pending |
+| IDN-01 | Phase 4 | Complete |
+| IDN-02 | Phase 4 | Complete |
+| IDN-03 | Phase 4 | Complete |
+| IDN-04 | Phase 4 | Complete |
 | OUT-01 | Phase 5 | Pending |
 | OUT-02 | Phase 5 | Pending |
 | OUT-03 | Phase 6 | Pending |

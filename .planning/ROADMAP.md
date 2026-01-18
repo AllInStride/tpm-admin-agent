@@ -13,7 +13,7 @@ This roadmap delivers a Meeting-to-Execution Agent that converts Zoom transcript
 - [x] **Phase 1: Foundation** - Event infrastructure, canonical models, project scaffolding
 - [x] **Phase 2: Transcript Ingestion** - Upload and parse Zoom transcripts with speaker identification
 - [x] **Phase 3: RAID Extraction** - Extract action items, decisions, risks, issues with confidence scores
-- [ ] **Phase 4: Identity Resolution** - Match transcript names to project roster and external systems
+- [x] **Phase 4: Identity Resolution** - Match transcript names to project roster and external systems
 - [ ] **Phase 5: Output Generation** - Generate meeting minutes and establish adapter pattern
 - [ ] **Phase 6: System Integration** - Write artifacts to Smartsheet and notify owners
 - [ ] **Phase 7: Cross-Meeting Intelligence** - Search past meetings and track open items
@@ -85,10 +85,10 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Identity schemas, fuzzy matcher, confidence calculator (Wave 1)
-- [ ] 04-02-PLAN.md — IdentityResolver orchestrator, learned mappings, LLM matcher (Wave 2)
-- [ ] 04-03-PLAN.md — Roster adapter and identity API endpoints (Wave 3)
-- [ ] 04-04-PLAN.md — Slack and Calendar adapters for multi-source verification (Wave 3)
+- [x] 04-01-PLAN.md — Identity schemas, fuzzy matcher, confidence calculator (Wave 1)
+- [x] 04-02-PLAN.md — IdentityResolver orchestrator, learned mappings, LLM matcher (Wave 2)
+- [x] 04-03-PLAN.md — Roster adapter and identity API endpoints (Wave 3)
+- [x] 04-04-PLAN.md — Slack and Calendar adapters for multi-source verification (Wave 3)
 
 ### Phase 5: Output Generation
 **Goal**: System generates meeting minutes and establishes extensible integration architecture
@@ -179,7 +179,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | 1. Foundation | 3/3 | Complete | 2026-01-18 |
 | 2. Transcript Ingestion | 3/3 | Complete | 2026-01-18 |
 | 3. RAID Extraction | 4/4 | Complete | 2026-01-18 |
-| 4. Identity Resolution | 0/4 | Planned | - |
+| 4. Identity Resolution | 4/4 | Complete | 2026-01-18 |
 | 5. Output Generation | 0/3 | Not started | - |
 | 6. System Integration | 0/3 | Not started | - |
 | 7. Cross-Meeting Intelligence | 0/3 | Not started | - |
