@@ -56,7 +56,7 @@ Plans:
 - [x] 02-03-PLAN.md — Meeting event emission and persistence (Wave 2)
 
 ### Phase 3: RAID Extraction
-**Goal**: System extracts RAID artifacts (Risks, Actions, Issues, Decisions) from parsed transcripts
+**Goal**: System extracts RAID artifacts (Risks, Actions, Issues, Decisions) from parsed transcripts using LLM
 **Depends on**: Phase 2
 **Requirements**: EXT-01, EXT-02, EXT-03, EXT-04, EXT-05
 **Success Criteria** (what must be TRUE):
@@ -65,13 +65,13 @@ Plans:
   3. System extracts risks with severity level
   4. System extracts issues with status
   5. Each extraction includes a confidence score
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 03-01: Extraction agent with structured output prompts
-- [ ] 03-02: Action item and decision extraction
-- [ ] 03-03: Risk and issue extraction
-- [ ] 03-04: Confidence scoring and verification
+- [ ] 03-01-PLAN.md — LLM infrastructure, extraction schemas, date normalizer (Wave 1)
+- [ ] 03-02-PLAN.md — Extraction prompts with confidence rubrics (Wave 1)
+- [ ] 03-03-PLAN.md — RAIDExtractor service with domain model conversion (Wave 2)
+- [ ] 03-04-PLAN.md — Extraction API endpoint with event emission (Wave 3)
 
 ### Phase 4: Identity Resolution
 **Goal**: System resolves names mentioned in transcripts to actual people in project roster
@@ -159,6 +159,7 @@ Plans:
   2. System drafts status updates formatted for team detail (full action item list, assignments)
   3. System generates escalation emails with facts, impact, and explicit ask
   4. System generates exec talking points for reviews
+
 **Plans**: TBD
 
 Plans:
@@ -176,7 +177,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete | 2026-01-18 |
 | 2. Transcript Ingestion | 3/3 | Complete | 2026-01-18 |
-| 3. RAID Extraction | 0/4 | Not started | - |
+| 3. RAID Extraction | 0/4 | Planned | - |
 | 4. Identity Resolution | 0/3 | Not started | - |
 | 5. Output Generation | 0/3 | Not started | - |
 | 6. System Integration | 0/3 | Not started | - |
@@ -188,5 +189,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 *Roadmap created: 2025-01-17*
 *Phase 1 planned: 2025-01-17*
 *Phase 2 planned: 2025-01-17*
+*Phase 3 planned: 2026-01-18*
 *Total plans: 29*
 *Total v1 requirements: 26 (100% coverage)*
