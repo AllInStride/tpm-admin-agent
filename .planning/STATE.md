@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2025-01-17)
 
 **Core value:** Convert meeting talk into tracked execution artifacts automatically — so TPMs shift from clerical work to strategic orchestration.
-**Current focus:** Phase 4 (Identity Resolution) - Plan 1 complete
+**Current focus:** Phase 4 (Identity Resolution) - Plan 2 complete
 
 ## Current Position
 
 Phase: 4 of 9 (Identity Resolution)
-Plan: 1 of 4 in current phase
+Plan: 2 of 4 in current phase
 Status: In progress
-Last activity: 2026-01-18 - Completed 04-01-PLAN.md
+Last activity: 2026-01-18 - Completed 04-02-PLAN.md
 
-Progress: [====......] 38%
+Progress: [=====.....] 43%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
-- Average duration: 3.6 min
-- Total execution time: 29 min
+- Total plans completed: 9
+- Average duration: 3.7 min
+- Total execution time: 34 min
 
 **By Phase:**
 
@@ -29,10 +29,10 @@ Progress: [====......] 38%
 |-------|-------|-------|----------|
 | 02 | 3/3 | 11 min | 3.7 min |
 | 03 | 4/4 | 14 min | 3.5 min |
-| 04 | 1/4 | 4 min | 4.0 min |
+| 04 | 2/4 | 9 min | 4.5 min |
 
 **Recent Trend:**
-- Last 5 plans: 03-02 (3 min), 03-03 (4 min), 03-04 (4 min), 04-01 (4 min)
+- Last 5 plans: 03-03 (4 min), 03-04 (4 min), 04-01 (4 min), 04-02 (5 min)
 - Trend: Stable execution pace
 
 *Updated after each plan completion*
@@ -65,6 +65,10 @@ Progress: [====......] 38%
 | 04-01 | token_sort_ratio for name order independence | John Smith = Smith, John with high score |
 | 04-01 | Single-source matches capped at 85% | Per CONTEXT.md - need verification for higher |
 | 04-01 | Multi-source boost: +5% per additional source | Calendar/Slack verification increases confidence |
+| 04-02 | 4-stage pipeline: exact -> learned -> fuzzy -> LLM | Cheapest operations first; LLM only for ambiguous cases |
+| 04-02 | Learned mappings confidence 0.95 | User-verified but might be outdated; not quite 1.0 |
+| 04-02 | LLM matches capped at 85% | Single-source cap; LLM inference needs verification |
+| 04-02 | Temp file SQLite for tests (not in-memory) | libsql_client has issues with in-memory batch operations |
 
 ### Pending Todos
 
@@ -85,10 +89,17 @@ Phase 4: Identity Resolution in progress.
 - RosterEntry and ResolutionResult schemas
 - 20 new tests passing
 
-**Test coverage:** 194 tests passing
+**Plan 04-02 complete:**
+- MappingRepository for learned mappings persistence
+- LLMMatcher for ambiguous name inference
+- IdentityResolver 4-stage pipeline (exact -> learned -> fuzzy -> LLM)
+- src/repositories/ module created
+- 20 new tests passing
+
+**Test coverage:** 214 tests passing
 
 ## Session Continuity
 
 Last session: 2026-01-18
-Stopped at: Completed 04-01-PLAN.md
+Stopped at: Completed 04-02-PLAN.md
 Resume file: None
