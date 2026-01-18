@@ -15,11 +15,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Extraction
 
-- [ ] **EXT-01**: System extracts action items with owner, due date, description
-- [ ] **EXT-02**: System extracts decisions with context and rationale
-- [ ] **EXT-03**: System extracts risks with severity level
-- [ ] **EXT-04**: System extracts issues with status
-- [ ] **EXT-05**: System provides confidence score for each extraction
+- [x] **EXT-01**: System extracts action items with owner, due date, description
+- [x] **EXT-02**: System extracts decisions with context and rationale
+- [x] **EXT-03**: System extracts risks with severity level
+- [x] **EXT-04**: System extracts issues with status
+- [x] **EXT-05**: System provides confidence score for each extraction
 
 ### Identity Resolution
 
@@ -110,11 +110,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ING-01 | Phase 2 | Complete |
 | ING-02 | Phase 2 | Complete |
 | ING-03 | Phase 2 | Complete |
-| EXT-01 | Phase 3 | Pending |
-| EXT-02 | Phase 3 | Pending |
-| EXT-03 | Phase 3 | Pending |
-| EXT-04 | Phase 3 | Pending |
-| EXT-05 | Phase 3 | Pending |
+| EXT-01 | Phase 3 | Complete |
+| EXT-02 | Phase 3 | Complete |
+| EXT-03 | Phase 3 | Complete |
+| EXT-04 | Phase 3 | Complete |
+| EXT-05 | Phase 3 | Complete |
 | IDN-01 | Phase 4 | Pending |
 | IDN-02 | Phase 4 | Pending |
 | IDN-03 | Phase 4 | Pending |

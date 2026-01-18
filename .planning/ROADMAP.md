@@ -12,7 +12,7 @@ This roadmap delivers a Meeting-to-Execution Agent that converts Zoom transcript
 
 - [x] **Phase 1: Foundation** - Event infrastructure, canonical models, project scaffolding
 - [x] **Phase 2: Transcript Ingestion** - Upload and parse Zoom transcripts with speaker identification
-- [ ] **Phase 3: RAID Extraction** - Extract action items, decisions, risks, issues with confidence scores
+- [x] **Phase 3: RAID Extraction** - Extract action items, decisions, risks, issues with confidence scores
 - [ ] **Phase 4: Identity Resolution** - Match transcript names to project roster and external systems
 - [ ] **Phase 5: Output Generation** - Generate meeting minutes and establish adapter pattern
 - [ ] **Phase 6: System Integration** - Write artifacts to Smartsheet and notify owners
@@ -68,10 +68,10 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — LLM infrastructure, extraction schemas, date normalizer (Wave 1)
-- [ ] 03-02-PLAN.md — Extraction prompts with confidence rubrics (Wave 1)
-- [ ] 03-03-PLAN.md — RAIDExtractor service with domain model conversion (Wave 2)
-- [ ] 03-04-PLAN.md — Extraction API endpoint with event emission (Wave 3)
+- [x] 03-01-PLAN.md — LLM infrastructure, extraction schemas, date normalizer (Wave 1)
+- [x] 03-02-PLAN.md — Extraction prompts with confidence rubrics (Wave 1)
+- [x] 03-03-PLAN.md — RAIDExtractor service with domain model conversion (Wave 2)
+- [x] 03-04-PLAN.md — Extraction API endpoint with event emission (Wave 3)
 
 ### Phase 4: Identity Resolution
 **Goal**: System resolves names mentioned in transcripts to actual people in project roster
@@ -177,7 +177,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete | 2026-01-18 |
 | 2. Transcript Ingestion | 3/3 | Complete | 2026-01-18 |
-| 3. RAID Extraction | 0/4 | Planned | - |
+| 3. RAID Extraction | 4/4 | Complete | 2026-01-18 |
 | 4. Identity Resolution | 0/3 | Not started | - |
 | 5. Output Generation | 0/3 | Not started | - |
 | 6. System Integration | 0/3 | Not started | - |
