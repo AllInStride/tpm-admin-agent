@@ -10,8 +10,8 @@ This roadmap delivers a Meeting-to-Execution Agent that converts Zoom transcript
 - Integer phases (1, 2, 3): Planned milestone work
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 1: Foundation** - Event infrastructure, canonical models, project scaffolding
-- [ ] **Phase 2: Transcript Ingestion** - Upload and parse Zoom transcripts with speaker identification
+- [x] **Phase 1: Foundation** - Event infrastructure, canonical models, project scaffolding
+- [x] **Phase 2: Transcript Ingestion** - Upload and parse Zoom transcripts with speaker identification
 - [ ] **Phase 3: RAID Extraction** - Extract action items, decisions, risks, issues with confidence scores
 - [ ] **Phase 4: Identity Resolution** - Match transcript names to project roster and external systems
 - [ ] **Phase 5: Output Generation** - Generate meeting minutes and establish adapter pattern
@@ -35,9 +35,9 @@ This roadmap delivers a Meeting-to-Execution Agent that converts Zoom transcript
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Project scaffolding with uv, FastAPI, and health endpoints
-- [ ] 01-02-PLAN.md — Canonical data models (Meeting, Participant, ActionItem, Decision, Risk, Issue)
-- [ ] 01-03-PLAN.md — Event bus and event store infrastructure
+- [x] 01-01-PLAN.md — Project scaffolding with uv, FastAPI, and health endpoints
+- [x] 01-02-PLAN.md — Canonical data models (Meeting, Participant, ActionItem, Decision, Risk, Issue)
+- [x] 01-03-PLAN.md — Event bus and event store infrastructure
 
 ### Phase 2: Transcript Ingestion
 **Goal**: User can upload a Zoom transcript and system parses it into structured meeting data
@@ -52,8 +52,8 @@ Plans:
 
 Plans:
 - [x] 02-01-PLAN.md — Upload endpoint with file validation (Wave 1)
-- [ ] 02-02-PLAN.md — VTT/SRT parser with speaker diarization (Wave 1)
-- [ ] 02-03-PLAN.md — Meeting event emission and persistence (Wave 2)
+- [x] 02-02-PLAN.md — VTT/SRT parser with speaker diarization (Wave 1)
+- [x] 02-03-PLAN.md — Meeting event emission and persistence (Wave 2)
 
 ### Phase 3: RAID Extraction
 **Goal**: System extracts RAID artifacts (Risks, Actions, Issues, Decisions) from parsed transcripts
@@ -174,8 +174,8 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/3 | Planned | - |
-| 2. Transcript Ingestion | 1/3 | In progress | - |
+| 1. Foundation | 3/3 | Complete | 2026-01-18 |
+| 2. Transcript Ingestion | 3/3 | Complete | 2026-01-18 |
 | 3. RAID Extraction | 0/4 | Not started | - |
 | 4. Identity Resolution | 0/3 | Not started | - |
 | 5. Output Generation | 0/3 | Not started | - |

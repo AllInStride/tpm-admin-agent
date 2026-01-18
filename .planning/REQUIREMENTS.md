@@ -9,9 +9,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Ingestion
 
-- [ ] **ING-01**: User can upload Zoom transcript file
-- [ ] **ING-02**: System parses VTT/SRT transcript formats
-- [ ] **ING-03**: System identifies speakers (diarization)
+- [x] **ING-01**: User can upload Zoom transcript file
+- [x] **ING-02**: System parses VTT/SRT transcript formats
+- [x] **ING-03**: System identifies speakers (diarization)
 
 ### Extraction
 
@@ -107,9 +107,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ING-01 | Phase 2 | Pending |
-| ING-02 | Phase 2 | Pending |
-| ING-03 | Phase 2 | Pending |
+| ING-01 | Phase 2 | Complete |
+| ING-02 | Phase 2 | Complete |
+| ING-03 | Phase 2 | Complete |
 | EXT-01 | Phase 3 | Pending |
 | EXT-02 | Phase 3 | Pending |
 | EXT-03 | Phase 3 | Pending |
