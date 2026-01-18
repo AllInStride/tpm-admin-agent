@@ -48,12 +48,12 @@ Plans:
   2. System parses transcript into timestamped utterances
   3. System identifies distinct speakers from transcript
   4. Parsed transcript persists as Meeting event in event store
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: Upload endpoint and file validation
-- [ ] 02-02: VTT/SRT parser with speaker diarization
-- [ ] 02-03: Meeting event emission and persistence
+- [ ] 02-01-PLAN.md — Upload endpoint with file validation (Wave 1)
+- [ ] 02-02-PLAN.md — VTT/SRT parser with speaker diarization (Wave 1)
+- [ ] 02-03-PLAN.md — Meeting event emission and persistence (Wave 2)
 
 ### Phase 3: RAID Extraction
 **Goal**: System extracts RAID artifacts (Risks, Actions, Issues, Decisions) from parsed transcripts
@@ -175,7 +175,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 0/3 | Planned | - |
-| 2. Transcript Ingestion | 0/3 | Not started | - |
+| 2. Transcript Ingestion | 0/3 | Planned | - |
 | 3. RAID Extraction | 0/4 | Not started | - |
 | 4. Identity Resolution | 0/3 | Not started | - |
 | 5. Output Generation | 0/3 | Not started | - |
@@ -187,5 +187,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 ---
 *Roadmap created: 2025-01-17*
 *Phase 1 planned: 2025-01-17*
+*Phase 2 planned: 2025-01-17*
 *Total plans: 29*
 *Total v1 requirements: 26 (100% coverage)*
