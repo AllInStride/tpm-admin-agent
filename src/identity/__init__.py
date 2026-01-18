@@ -6,4 +6,6 @@ This module provides:
 - Schemas for roster entries and resolution results
 """
 
-# Exports will be added as components are implemented
+from src.identity.schemas import ResolutionResult, ResolutionSource, RosterEntry
+
+__all__ = ["RosterEntry", "ResolutionResult", "ResolutionSource"]
