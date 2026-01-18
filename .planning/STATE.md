@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2025-01-17)
 ## Current Position
 
 Phase: 3 of 9 (RAID Extraction)
-Plan: 2 of 4 in current phase complete
+Plan: 3 of 4 in current phase complete
 Status: In progress
-Last activity: 2026-01-18 - Completed 03-01-PLAN.md
+Last activity: 2026-01-18 - Completed 03-03-PLAN.md
 
-Progress: [=====.....] 18%
+Progress: [======....] 21%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
-- Average duration: 3.4 min
-- Total execution time: 17 min
+- Total plans completed: 6
+- Average duration: 3.5 min
+- Total execution time: 21 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 02 | 3/3 | 11 min | 3.7 min |
-| 03 | 2/4 | 6 min | 3.0 min |
+| 03 | 3/4 | 10 min | 3.3 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-03 (4 min), 03-02 (3 min), 03-01 (6 min)
+- Last 5 plans: 02-03 (4 min), 03-02 (3 min), 03-01 (6 min), 03-03 (4 min)
 - Trend: Stable execution pace
 
 *Updated after each plan completion*
@@ -55,6 +55,9 @@ Progress: [=====.....] 18%
 | 03-01 | dateparser limitations documented | Library parses "Friday" but not "next Friday" |
 | 03-01 | Extraction schemas separate from domain | due_date_raw string, no UUIDs/timestamps |
 | 03-01 | LLMClient allows None client | Enables testing without API key |
+| 03-03 | Sequential extraction (not parallel) | Avoid LLM rate limits |
+| 03-03 | Error isolation per extraction type | Failed extraction returns [], doesn't stop others |
+| 03-03 | Confidence filtering uses >= threshold | Inclusive comparison at boundary |
 
 ### Pending Todos
 
@@ -70,11 +73,11 @@ Phase 3: RAID Extraction in progress.
 
 - [x] Extraction schemas for LLM output (03-01)
 - [x] RAID extraction prompts with confidence rubrics (03-02)
-- [ ] RAIDExtractor service with LLM client (03-03)
+- [x] RAIDExtractor service with LLM client (03-03)
 - [ ] Extraction endpoint and event emission (03-04)
 
 ## Session Continuity
 
-Last session: 2026-01-18T21:16:00Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-01-18T21:16:20Z
+Stopped at: Completed 03-03-PLAN.md
 Resume file: None
