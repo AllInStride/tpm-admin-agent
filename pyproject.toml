@@ -16,6 +16,7 @@ dependencies = [
     "structlog>=25.5.0",
     "uvicorn>=0.40.0",
     "webvtt-py>=0.5.1",
+    "rapidfuzz>=3.14.0",
 ]
 
 [dependency-groups]
