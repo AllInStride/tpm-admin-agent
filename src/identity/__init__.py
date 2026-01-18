@@ -2,16 +2,19 @@
 
 This module provides:
 - Fuzzy name matching using RapidFuzz (Jaro-Winkler/token_sort_ratio)
+- LLM-assisted inference for ambiguous cases (nicknames, initials)
 - Multi-source confidence calculation
 - Schemas for roster entries and resolution results
 """
 
 from src.identity.confidence import calculate_confidence
 from src.identity.fuzzy_matcher import FuzzyMatcher
+from src.identity.llm_matcher import LLMMatcher
 from src.identity.schemas import ResolutionResult, ResolutionSource, RosterEntry
 
 __all__ = [
     "FuzzyMatcher",
+    "LLMMatcher",
     "ResolutionResult",
     "ResolutionSource",
     "RosterEntry",
