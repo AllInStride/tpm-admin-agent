@@ -82,12 +82,13 @@ Plans:
   2. System cross-references Slack channel membership for resolution
   3. System cross-references Google Calendar attendees for resolution
   4. System flags low-confidence matches for human review (threshold: <85%)
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 04-01: Roster adapter and name matching
-- [ ] 04-02: Slack and Calendar integration for cross-reference
-- [ ] 04-03: Confidence thresholds and human-in-the-loop UI
+- [ ] 04-01-PLAN.md — Identity schemas, fuzzy matcher, confidence calculator (Wave 1)
+- [ ] 04-02-PLAN.md — IdentityResolver orchestrator, learned mappings, LLM matcher (Wave 2)
+- [ ] 04-03-PLAN.md — Roster adapter and identity API endpoints (Wave 3)
+- [ ] 04-04-PLAN.md — Slack and Calendar adapters for multi-source verification (Wave 3)
 
 ### Phase 5: Output Generation
 **Goal**: System generates meeting minutes and establishes extensible integration architecture
@@ -178,7 +179,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | 1. Foundation | 3/3 | Complete | 2026-01-18 |
 | 2. Transcript Ingestion | 3/3 | Complete | 2026-01-18 |
 | 3. RAID Extraction | 4/4 | Complete | 2026-01-18 |
-| 4. Identity Resolution | 0/3 | Not started | - |
+| 4. Identity Resolution | 0/4 | Planned | - |
 | 5. Output Generation | 0/3 | Not started | - |
 | 6. System Integration | 0/3 | Not started | - |
 | 7. Cross-Meeting Intelligence | 0/3 | Not started | - |
@@ -190,5 +191,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 *Phase 1 planned: 2025-01-17*
 *Phase 2 planned: 2025-01-17*
 *Phase 3 planned: 2026-01-18*
-*Total plans: 29*
+*Phase 4 planned: 2026-01-18*
+*Total plans: 30*
 *Total v1 requirements: 26 (100% coverage)*
