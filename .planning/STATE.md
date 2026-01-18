@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2025-01-17)
 ## Current Position
 
 Phase: 3 of 9 (RAID Extraction)
-Plan: 2 of 4 in current phase
+Plan: 2 of 4 in current phase complete
 Status: In progress
-Last activity: 2026-01-18 - Completed 03-02-PLAN.md
+Last activity: 2026-01-18 - Completed 03-01-PLAN.md
 
-Progress: [====......] 15%
+Progress: [=====.....] 18%
 
 ## Performance Metrics
 
@@ -31,7 +31,7 @@ Progress: [====......] 15%
 | 03 | 2/4 | 6 min | 3.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-02 (5 min), 02-03 (4 min), 03-01 (3 min), 03-02 (3 min)
+- Last 5 plans: 02-03 (4 min), 03-02 (3 min), 03-01 (6 min)
 - Trend: Stable execution pace
 
 *Updated after each plan completion*
@@ -52,6 +52,9 @@ Progress: [====......] 15%
 | 03-02 | 3-tier confidence rubric (0.9/0.7/0.5) | Calibrate LLM confidence with explicit examples |
 | 03-02 | 0.5 minimum extraction threshold | Below this is too uncertain for TPM workflows |
 | 03-02 | Separate prompts per RAID type | Better precision than single mega-prompt |
+| 03-01 | dateparser limitations documented | Library parses "Friday" but not "next Friday" |
+| 03-01 | Extraction schemas separate from domain | due_date_raw string, no UUIDs/timestamps |
+| 03-01 | LLMClient allows None client | Enables testing without API key |
 
 ### Pending Todos
 
@@ -72,6 +75,6 @@ Phase 3: RAID Extraction in progress.
 
 ## Session Continuity
 
-Last session: 2026-01-18T21:08:56Z
-Stopped at: Completed 03-02-PLAN.md
+Last session: 2026-01-18T21:16:00Z
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None
