@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2025-01-17)
 
 **Core value:** Convert meeting talk into tracked execution artifacts automatically — so TPMs shift from clerical work to strategic orchestration.
-**Current focus:** Phase 7 (Cross-Meeting Intelligence) - Plan 02 complete
+**Current focus:** Phase 7 (Cross-Meeting Intelligence) - Complete
 
 ## Current Position
 
 Phase: 7 of 9 (Cross-Meeting Intelligence)
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-01-19 - Completed 07-02-PLAN.md
+Plan: 3 of 3 in current phase
+Status: Phase complete
+Last activity: 2026-01-19 - Completed 07-03-PLAN.md
 
-Progress: [========..] 82%
+Progress: [=========.] 87%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 19
-- Average duration: 4.7 min
-- Total execution time: 89 min
+- Total plans completed: 20
+- Average duration: 4.9 min
+- Total execution time: 97 min
 
 **By Phase:**
 
@@ -32,10 +32,10 @@ Progress: [========..] 82%
 | 04 | 4/4 | 19 min | 4.8 min |
 | 05 | 3/3 | 12 min | 4.0 min |
 | 06 | 3/3 | 20 min | 6.7 min |
-| 07 | 2/3 | 13 min | 6.5 min |
+| 07 | 3/3 | 21 min | 7.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 06-02 (7 min), 06-03 (5 min), 07-01 (4 min), 07-02 (9 min)
+- Last 5 plans: 06-03 (5 min), 07-01 (4 min), 07-02 (9 min), 07-03 (8 min)
 - Trend: Stable execution pace
 
 *Updated after each plan completion*
@@ -110,6 +110,9 @@ Progress: [========..] 82%
 | 07-02 | Single SQL query for summary counts | Avoid N+1 query pattern |
 | 07-02 | Filter builder pattern for dynamic WHERE | Optional filter params handled cleanly |
 | 07-02 | ORDER BY for grouping | Dashboard needs sorted items, not aggregated counts |
+| 07-03 | Empty keywords returns empty results | FTS5 MATCH requires keywords; filters alone cannot drive search |
+| 07-03 | BM25 scores converted to absolute values | bm25() returns negative; abs() provides intuitive relevance |
+| 07-03 | Duplicate rejections stored separately | Separation of concerns; doesn't bloat projection table |
 
 ### Pending Todos
 
@@ -119,9 +122,9 @@ None yet.
 
 None yet.
 
-## Phase 7 Progress
+## Phase 7 Complete
 
-Phase 7: Cross-Meeting Intelligence in progress.
+Phase 7: Cross-Meeting Intelligence complete.
 
 **Plan 07-01 complete:**
 - Projection schemas: MeetingProjection, RaidItemProjection, TranscriptProjection
@@ -142,10 +145,19 @@ Phase 7: Cross-Meeting Intelligence in progress.
 - Filter/summary/history schemas
 - 51 new tests passing
 
-**Test coverage:** 467 tests passing
+**Plan 07-03 complete:**
+- FTSService with query parsing and FTS5 execution
+- parse_search_query() for filter syntax extraction
+- DuplicateDetector using RapidFuzz token_set_ratio
+- Rejection persistence to avoid re-prompting
+- 7 API endpoints for search and dashboard
+- Services initialized in main.py lifespan
+- 46 new tests passing
+
+**Test coverage:** 513 tests passing
 
 ## Session Continuity
 
-Last session: 2026-01-19T16:57:46Z
-Stopped at: Verified 07-01-PLAN.md (re-executed and confirmed)
+Last session: 2026-01-19T17:08:00Z
+Stopped at: Completed 07-03-PLAN.md
 Resume file: None
