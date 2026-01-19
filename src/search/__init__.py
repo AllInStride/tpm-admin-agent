@@ -14,6 +14,7 @@ from src.search.open_items import (
     classify_change,
     is_item_open,
 )
+from src.search.projections import ProjectionBuilder
 from src.search.schemas import (
     MeetingProjection,
     RaidItemProjection,
@@ -28,6 +29,7 @@ __all__ = [
     "MeetingProjection",
     "OpenItemFilter",
     "OpenItemSummary",
+    "ProjectionBuilder",
     "RaidItemProjection",
     "TranscriptProjection",
     "classify_change",

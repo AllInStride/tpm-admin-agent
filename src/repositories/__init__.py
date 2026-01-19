@@ -6,7 +6,9 @@ for the service layer.
 """
 
 from src.repositories.mapping_repo import MappingRepository
+from src.repositories.open_items_repo import OpenItemsRepository
 
 __all__ = [
     "MappingRepository",
+    "OpenItemsRepository",
 ]
