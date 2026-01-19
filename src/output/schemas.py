@@ -124,7 +124,8 @@ class MinutesContext(BaseModel):
         attendees = []
         for participant in meeting.participants:
             if participant.role:
-                attendees.append(f"{participant.name} ({participant.role})")
+                role_str = participant.role.value.title()
+                attendees.append(f"{participant.name} ({role_str})")
             else:
                 attendees.append(participant.name)
 
