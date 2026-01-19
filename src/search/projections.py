@@ -5,7 +5,8 @@ to maintain queryable state for cross-meeting intelligence features.
 """
 
 import logging
-from typing import TYPE_CHECKING
+from datetime import datetime
+from typing import TYPE_CHECKING, Any
 
 from src.events.store import EventStore
 from src.repositories.projection_repo import ProjectionRepository
@@ -18,6 +19,23 @@ if TYPE_CHECKING:
     from src.events.base import Event
 
 logger = logging.getLogger(__name__)
+
+
+def _to_string(value: Any) -> str | None:
+    """Convert a value to string, handling datetime objects.
+
+    Args:
+        value: Value to convert (may be datetime, str, or None)
+
+    Returns:
+        String representation or None
+    """
+    if value is None:
+        return None
+    if isinstance(value, datetime):
+        return value.isoformat()
+    return str(value)
+
 
 # Event type constants
 EVENT_MEETING_CREATED = "MeetingCreated"
@@ -89,9 +107,9 @@ class ProjectionBuilder:
             return
 
         projection = MeetingProjection(
-            id=meeting_id,
+            id=str(meeting_id),
             title=data.get("title", "Untitled Meeting"),
-            date=data.get("meeting_date"),
+            date=_to_string(data.get("meeting_date")),
             participant_count=data.get("participant_count", 0),
         )
         await self._projection_repo.upsert_meeting(projection)
@@ -129,7 +147,7 @@ class ProjectionBuilder:
             item_type="action",
             description=data.get("description", ""),
             owner=data.get("assignee_name"),
-            due_date=data.get("due_date"),
+            due_date=_to_string(data.get("due_date")),
             status="pending",
             confidence=data.get("confidence", 1.0),
         )
