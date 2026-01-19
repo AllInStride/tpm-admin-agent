@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2025-01-17)
 
 **Core value:** Convert meeting talk into tracked execution artifacts automatically — so TPMs shift from clerical work to strategic orchestration.
-**Current focus:** Phase 6 Complete - Ready for Phase 7 (Cross-Meeting Intelligence)
+**Current focus:** Phase 7 (Cross-Meeting Intelligence) - Plan 02 complete
 
 ## Current Position
 
-Phase: 6 of 9 (System Integration) - COMPLETE
-Plan: 3 of 3 in current phase
-Status: Phase verified and complete
-Last activity: 2026-01-19 - Phase 6 verification passed
+Phase: 7 of 9 (Cross-Meeting Intelligence)
+Plan: 2 of 3 in current phase
+Status: In progress
+Last activity: 2026-01-19 - Completed 07-02-PLAN.md
 
-Progress: [========..] 78%
+Progress: [========..] 82%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 17
-- Average duration: 4.5 min
-- Total execution time: 76 min
+- Total plans completed: 19
+- Average duration: 4.7 min
+- Total execution time: 89 min
 
 **By Phase:**
 
@@ -32,9 +32,10 @@ Progress: [========..] 78%
 | 04 | 4/4 | 19 min | 4.8 min |
 | 05 | 3/3 | 12 min | 4.0 min |
 | 06 | 3/3 | 20 min | 6.7 min |
+| 07 | 2/3 | 13 min | 6.5 min |
 
 **Recent Trend:**
-- Last 5 plans: 05-03 (4 min), 06-01 (8 min), 06-02 (7 min), 06-03 (5 min)
+- Last 5 plans: 06-02 (7 min), 06-03 (5 min), 07-01 (4 min), 07-02 (9 min)
 - Trend: Stable execution pace
 
 *Updated after each plan completion*
@@ -100,6 +101,15 @@ Progress: [========..] 78%
 | 06-03 | TYPE_CHECKING for SmartsheetAdapter import | Prevent circular import between adapters and integration |
 | 06-03 | ProjectOutputConfig extended with Smartsheet settings | smartsheet_sheet_id, notify_owners, fallback_email |
 | 06-03 | Partial success supported | Smartsheet failure doesn't block notifications |
+| 07-01 | FTS5 external content tables | Avoid data duplication for search indexes |
+| 07-01 | Triggers for FTS5 sync | Auto-sync on INSERT/UPDATE/DELETE |
+| 07-01 | Individual execute() for FTS5 ops | Avoid libsql_client batch issues per RESEARCH.md |
+| 07-02 | CLOSED_STATUSES = {completed, cancelled, closed, resolved} | Standard TPM workflow statuses |
+| 07-02 | None status is open | Items without status appear in open lists |
+| 07-02 | Case-insensitive status check | Avoid casing mismatches |
+| 07-02 | Single SQL query for summary counts | Avoid N+1 query pattern |
+| 07-02 | Filter builder pattern for dynamic WHERE | Optional filter params handled cleanly |
+| 07-02 | ORDER BY for grouping | Dashboard needs sorted items, not aggregated counts |
 
 ### Pending Todos
 
@@ -109,37 +119,33 @@ None yet.
 
 None yet.
 
-## Phase 6 Complete
+## Phase 7 Progress
 
-Phase 6: System Integration complete.
+Phase 7: Cross-Meeting Intelligence in progress.
 
-**Plan 06-01 complete:**
-- smartsheet-python-sdk>=3.7.1 added to dependencies
-- SmartsheetAdapter with create_sheet, write_raid_items, health_check
-- BATCH_SIZE=100 chunking for add_rows calls
-- Dynamic column ID mapping via _get_column_map
-- Integration schemas: SmartsheetConfig, SmartsheetWriteResult, RaidRowData
-- RAID_COLUMNS constant with standard TPM column definitions
-- 19 new tests passing
+**Plan 07-01 complete:**
+- Projection schemas: MeetingProjection, RaidItemProjection, TranscriptProjection
+- ProjectionRepository with FTS5 indexes and sync triggers
+- ProjectionBuilder to materialize events into projections
+- Event bus wiring for automatic projection updates
+- rebuild_all() for projection reconstruction
+- 31 new tests passing
 
-**Plan 06-02 complete:**
-- SlackAdapter extended with send_dm and lookup_user_by_email
-- NotificationService with notify_owner and audit trail
-- Message format: mrkdwn with title, due date, Smartsheet link
-- NotificationResult and NotificationRecord schemas
-- 31 new tests passing (17 slack + 14 notification)
+**Plan 07-02 complete:**
+- Centralized is_item_open() function
+- CLOSED_STATUSES constant for SQL queries
+- OpenItemsRepository with dashboard queries
+- get_summary() aggregation (single SQL query)
+- get_items() with filtering and grouping
+- close_item() status update
+- get_item_history() timeline queries
+- Filter/summary/history schemas
+- 51 new tests passing
 
-**Plan 06-03 complete:**
-- IntegrationRouter orchestrating Smartsheet + Slack
-- POST /integration endpoint for RAID bundle processing
-- GET /integration/health for adapter status
-- ProjectOutputConfig extended with Smartsheet and notification settings
-- 11 new tests passing
-
-**Test coverage:** 385 tests passing
+**Test coverage:** 467 tests passing
 
 ## Session Continuity
 
 Last session: 2026-01-19
-Stopped at: Completed 06-03-PLAN.md (Phase 6 complete)
+Stopped at: Completed 07-02-PLAN.md
 Resume file: None
