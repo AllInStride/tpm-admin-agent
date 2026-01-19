@@ -1,12 +1,13 @@
-"""Adapter for uploading meeting minutes to Google Drive.
+"""Adapter for uploading meeting minutes and searching docs in Google Drive.
 
 Uses Google Drive API with service account authentication to
-upload meeting minutes files.
+upload meeting minutes files and search for project documents.
 """
 
 import asyncio
 import os
 import time
+from datetime import datetime
 from io import BytesIO
 
 import structlog
@@ -200,3 +201,102 @@ class DriveAdapter:
             return True
         except Exception:
             return False
+
+    async def search_project_docs(
+        self,
+        folder_id: str,
+        query_terms: list[str] | None = None,
+        max_results: int = 10,
+        modified_after: datetime | None = None,
+    ) -> list[dict]:
+        """Search for project documents in a folder.
+
+        Args:
+            folder_id: Google Drive folder ID to search in
+            query_terms: Optional search terms for name or content
+            max_results: Maximum documents to return (default 10)
+            modified_after: Optional filter for recently modified docs
+
+        Returns:
+            List of document dicts with id, name, webViewLink,
+            modifiedTime, mimeType. Ordered by modifiedTime desc.
+        """
+        return await asyncio.to_thread(
+            self._search_docs_sync,
+            folder_id,
+            query_terms,
+            max_results,
+            modified_after,
+        )
+
+    def _search_docs_sync(
+        self,
+        folder_id: str,
+        query_terms: list[str] | None,
+        max_results: int,
+        modified_after: datetime | None,
+    ) -> list[dict]:
+        """Synchronous document search implementation."""
+        try:
+            service = self._get_service()
+
+            # Build query: start with folder scope
+            query_parts = [f"'{folder_id}' in parents", "trashed = false"]
+
+            # Add search terms if provided
+            if query_terms:
+                term_conditions = []
+                for term in query_terms:
+                    escaped_term = term.replace("'", "\\'")
+                    term_conditions.append(
+                        f"(name contains '{escaped_term}' or "
+                        f"fullText contains '{escaped_term}')"
+                    )
+                if term_conditions:
+                    query_parts.append(f"({' or '.join(term_conditions)})")
+
+            # Add modified date filter if provided
+            if modified_after:
+                iso_date = modified_after.strftime("%Y-%m-%dT%H:%M:%S")
+                query_parts.append(f"modifiedTime > '{iso_date}'")
+
+            query = " and ".join(query_parts)
+
+            result = (
+                service.files()
+                .list(
+                    q=query,
+                    pageSize=max_results,
+                    fields="files(id,name,webViewLink,modifiedTime,mimeType)",
+                    orderBy="modifiedTime desc",
+                )
+                .execute()
+            )
+
+            files = result.get("files", [])
+
+            logger.debug(
+                "searched project docs",
+                folder_id=folder_id,
+                query_terms=query_terms,
+                found_count=len(files),
+            )
+
+            return [
+                {
+                    "id": f.get("id"),
+                    "name": f.get("name"),
+                    "webViewLink": f.get("webViewLink"),
+                    "modifiedTime": f.get("modifiedTime"),
+                    "mimeType": f.get("mimeType"),
+                }
+                for f in files
+            ]
+
+        except Exception as e:
+            logger.warning(
+                "Error searching project docs",
+                folder_id=folder_id,
+                error=str(e),
+            )
+            return []
