@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2025-01-17)
 
 **Core value:** Convert meeting talk into tracked execution artifacts automatically — so TPMs shift from clerical work to strategic orchestration.
-**Current focus:** Phase 5 Plan 2 Complete - Output Adapters
+**Current focus:** Phase 5 Plan 3 Complete - Output Routing and API
 
 ## Current Position
 
 Phase: 5 of 9 (Output Generation)
-Plan: 2 of 4 in current phase
+Plan: 3 of 4 in current phase
 Status: In progress
-Last activity: 2026-01-19 - Completed 05-02-PLAN.md
+Last activity: 2026-01-19 - Completed 05-03-PLAN.md
 
-Progress: [======....] 52%
+Progress: [======....] 56%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 13
+- Total plans completed: 14
 - Average duration: 4.0 min
-- Total execution time: 52 min
+- Total execution time: 56 min
 
 **By Phase:**
 
@@ -30,10 +30,10 @@ Progress: [======....] 52%
 | 02 | 3/3 | 11 min | 3.7 min |
 | 03 | 4/4 | 14 min | 3.5 min |
 | 04 | 4/4 | 19 min | 4.8 min |
-| 05 | 2/4 | 8 min | 4.0 min |
+| 05 | 3/4 | 12 min | 4.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-03 (4 min), 04-04 (6 min), 05-01 (5 min), 05-02 (3 min)
+- Last 5 plans: 04-04 (6 min), 05-01 (5 min), 05-02 (3 min), 05-03 (4 min)
 - Trend: Stable execution pace
 
 *Updated after each plan completion*
@@ -85,6 +85,10 @@ Progress: [======....] 52%
 | 05-02 | asyncio.to_thread for sync SDK calls | Non-blocking I/O without async SDK |
 | 05-02 | DriveAdapter falls back to Sheets creds | Reuse existing service account |
 | 05-02 | SheetsAdapter auto-creates worksheet | Better UX, ready to use |
+| 05-03 | In-memory RetryQueue for MVP | SQLite persistence deferred per CONTEXT.md |
+| 05-03 | Tenacity retry: 5 attempts, 4-60s backoff | Handle transient Google API failures |
+| 05-03 | OutputRouter coordinates adapters | Single orchestration point for output pipeline |
+| 05-03 | Minutes filename: {date}-{title-slug}.md | Sortable by date, human-readable |
 
 ### Pending Todos
 
@@ -114,10 +118,19 @@ Phase 5: Output Generation in progress.
 - asyncio.to_thread for non-blocking I/O
 - 21 new tests passing
 
-**Test coverage:** 319 tests passing
+**Plan 05-03 complete:**
+- ProjectOutputConfig for per-project settings
+- write_with_retry with tenacity exponential backoff
+- RetryQueue for failed item storage
+- OutputRouter orchestrating renderer and adapters
+- POST /output API endpoint with dry_run support
+- GET /output/health for adapter status
+- 15 new tests passing
+
+**Test coverage:** 334 tests passing
 
 ## Session Continuity
 
 Last session: 2026-01-19
-Stopped at: Completed 05-02-PLAN.md
+Stopped at: Completed 05-03-PLAN.md
 Resume file: None
