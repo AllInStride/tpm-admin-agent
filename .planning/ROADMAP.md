@@ -114,12 +114,12 @@ Plans:
   2. System handles Smartsheet rate limiting gracefully
   3. System notifies owners of assigned items via Slack
   4. Notification includes item description, due date, and link to source meeting
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 06-01: Smartsheet adapter with rate limiting
-- [ ] 06-02: Artifact routing and row creation
-- [ ] 06-03: Slack notification adapter
+- [ ] 06-01-PLAN.md — SmartsheetAdapter with batch writes and sheet creation (Wave 1)
+- [ ] 06-02-PLAN.md — NotificationService with Slack DMs and audit trail (Wave 1)
+- [ ] 06-03-PLAN.md — IntegrationRouter and POST /integration endpoint (Wave 2)
 
 ### Phase 7: Cross-Meeting Intelligence
 **Goal**: User can search and track items across multiple meetings
@@ -181,7 +181,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | 3. RAID Extraction | 4/4 | Complete | 2026-01-18 |
 | 4. Identity Resolution | 4/4 | Complete | 2026-01-18 |
 | 5. Output Generation | 3/3 | Complete | 2026-01-18 |
-| 6. System Integration | 0/3 | Not started | - |
+| 6. System Integration | 0/3 | Planned | - |
 | 7. Cross-Meeting Intelligence | 0/3 | Not started | - |
 | 8. Meeting Prep | 0/3 | Not started | - |
 | 9. Communication Automation | 0/4 | Not started | - |
@@ -193,5 +193,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 *Phase 3 planned: 2026-01-18*
 *Phase 4 planned: 2026-01-18*
 *Phase 5 planned: 2026-01-18*
+*Phase 6 planned: 2026-01-19*
 *Total plans: 30*
 *Total v1 requirements: 26 (100% coverage)*
