@@ -1,10 +1,12 @@
-"""Slack workspace adapter for identity verification.
+"""Slack workspace adapter for identity verification and messaging.
 
 Uses Slack Web API to verify that users exist in a workspace,
-enabling multi-source identity corroboration.
+enabling multi-source identity corroboration. Also supports channel
+history retrieval and Block Kit formatted messaging for meeting prep.
 """
 
 import os
+from datetime import UTC, datetime, timedelta
 
 import structlog
 from slack_sdk import WebClient
@@ -147,3 +149,84 @@ class SlackAdapter:
                 error=str(e),
             )
             return set()
+
+    async def get_channel_history(
+        self,
+        channel_id: str,
+        days: int = 7,
+        limit: int = 100,
+    ) -> list[dict]:
+        """Get recent messages from a channel.
+
+        Args:
+            channel_id: Slack channel ID
+            days: How many days back to look (default 7)
+            limit: Maximum messages to return (default 100)
+
+        Returns:
+            List of message dicts (newest first) with text, user, ts,
+            and thread_ts if the message is a reply.
+        """
+        try:
+            client = self._get_client()
+            oldest = (datetime.now(UTC) - timedelta(days=days)).timestamp()
+
+            result = client.conversations_history(
+                channel=channel_id,
+                oldest=str(oldest),
+                limit=limit,
+            )
+            return result.get("messages", [])
+        except SlackApiError as e:
+            if e.response.get("error") == "channel_not_found":
+                logger.warning(
+                    "Channel not found for history",
+                    channel_id=channel_id,
+                )
+                return []
+            logger.warning(
+                "Slack API error getting channel history",
+                channel_id=channel_id,
+                error=str(e),
+            )
+            return []
+        except Exception as e:
+            logger.warning(
+                "Error getting channel history",
+                channel_id=channel_id,
+                error=str(e),
+            )
+            return []
+
+    async def send_prep_dm(
+        self,
+        user_id: str,
+        blocks: list[dict],
+        text_fallback: str,
+    ) -> dict:
+        """Send prep summary as DM with Block Kit formatting.
+
+        Args:
+            user_id: Slack user ID
+            blocks: Block Kit blocks for rich formatting
+            text_fallback: Plain text fallback for notifications
+
+        Returns:
+            Dict with 'success' and 'ts' (timestamp) or 'error'
+        """
+        try:
+            client = self._get_client()
+            response = client.chat_postMessage(
+                channel=user_id,  # DM channel opened automatically
+                blocks=blocks,
+                text=text_fallback,
+            )
+            return {"success": True, "ts": response["ts"]}
+        except SlackApiError as e:
+            error = e.response.get("error", "unknown_error")
+            logger.warning(
+                "Failed to send Slack prep DM",
+                user_id=user_id,
+                error=error,
+            )
+            return {"success": False, "error": error}

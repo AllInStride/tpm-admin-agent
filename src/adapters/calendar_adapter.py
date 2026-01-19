@@ -1,8 +1,10 @@
-"""Google Calendar adapter for attendee verification.
+"""Google Calendar adapter for attendee verification and event listing.
 
-Uses Google Calendar API to get meeting attendees for identity corroboration.
+Uses Google Calendar API to get meeting attendees for identity corroboration
+and to list upcoming events for meeting prep.
 """
 
+import asyncio
 import os
 from datetime import datetime, timedelta
 
@@ -17,9 +19,9 @@ CALENDAR_SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
 
 
 class CalendarAdapter:
-    """Adapter for Google Calendar attendee verification.
+    """Adapter for Google Calendar operations.
 
-    Uses Google Calendar API to get meeting attendees for cross-reference.
+    Uses Google Calendar API for attendee verification and event listing.
     """
 
     def __init__(self, credentials_path: str | None = None):
@@ -157,3 +159,65 @@ class CalendarAdapter:
                 error=str(e),
             )
             return None
+
+    async def list_upcoming_events(
+        self,
+        calendar_id: str,
+        time_min: datetime,
+        time_max: datetime,
+        max_results: int = 50,
+    ) -> list[dict]:
+        """List events in a time window.
+
+        Args:
+            calendar_id: Calendar ID (user's email for primary calendar)
+            time_min: Start of time window (UTC)
+            time_max: End of time window (UTC)
+            max_results: Maximum events to return (default 50)
+
+        Returns:
+            List of event dicts with id, summary, start, end, attendees
+        """
+        try:
+            service = self._get_service()
+
+            def _fetch_events():
+                return (
+                    service.events()
+                    .list(
+                        calendarId=calendar_id,
+                        timeMin=time_min.isoformat()
+                        + ("Z" if time_min.tzinfo is None else ""),
+                        timeMax=time_max.isoformat()
+                        + ("Z" if time_max.tzinfo is None else ""),
+                        maxResults=max_results,
+                        singleEvents=True,
+                        orderBy="startTime",
+                    )
+                    .execute()
+                )
+
+            # Use asyncio.to_thread for non-blocking I/O
+            events_result = await asyncio.to_thread(_fetch_events)
+            items = events_result.get("items", [])
+
+            # Normalize event structure
+            return [
+                {
+                    "id": event.get("id"),
+                    "summary": event.get("summary", ""),
+                    "start": event.get("start", {}),
+                    "end": event.get("end", {}),
+                    "attendees": event.get("attendees", []),
+                }
+                for event in items
+            ]
+        except Exception as e:
+            logger.warning(
+                "Error listing upcoming events",
+                calendar_id=calendar_id,
+                time_min=time_min.isoformat(),
+                time_max=time_max.isoformat(),
+                error=str(e),
+            )
+            return []
