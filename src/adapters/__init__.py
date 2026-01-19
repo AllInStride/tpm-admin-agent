@@ -4,6 +4,7 @@ This module provides adapters for integrating with external systems:
 - RosterAdapter: Load project rosters from Google Sheets
 - SlackAdapter: Verify workspace membership for identity corroboration
 - CalendarAdapter: Verify meeting attendees for identity corroboration
+- SmartsheetAdapter: Write RAID items to Smartsheet
 - OutputAdapter: Protocol for write adapters
 - WriteResult: Result model for write operations
 """
@@ -14,6 +15,7 @@ from src.adapters.drive_adapter import DriveAdapter
 from src.adapters.roster_adapter import RosterAdapter
 from src.adapters.sheets_adapter import SheetsAdapter
 from src.adapters.slack_adapter import SlackAdapter
+from src.adapters.smartsheet_adapter import SmartsheetAdapter
 
 __all__ = [
     "CalendarAdapter",
@@ -22,5 +24,6 @@ __all__ = [
     "RosterAdapter",
     "SheetsAdapter",
     "SlackAdapter",
+    "SmartsheetAdapter",
     "WriteResult",
 ]
