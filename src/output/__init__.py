@@ -1,6 +1,8 @@
 """Output module for meeting minutes generation and rendering."""
 
+from src.output.config import ProjectOutputConfig
 from src.output.renderer import MinutesRenderer
+from src.output.router import OutputResult, OutputRouter
 from src.output.schemas import (
     ActionItemData,
     DecisionItem,
@@ -17,6 +19,9 @@ __all__ = [
     "IssueItem",
     "MinutesContext",
     "MinutesRenderer",
+    "OutputResult",
+    "OutputRouter",
+    "ProjectOutputConfig",
     "RaidBundle",
     "RenderedMinutes",
     "RiskItem",
