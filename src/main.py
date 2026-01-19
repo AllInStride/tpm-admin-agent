@@ -1,8 +1,9 @@
 """FastAPI application entry point."""
 
 import logging
+import os
 from collections.abc import AsyncGenerator
-from contextlib import asynccontextmanager
+from contextlib import AsyncExitStack, asynccontextmanager
 
 from fastapi import FastAPI
 
@@ -31,6 +32,74 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
+
+
+async def _initialize_prep_service(app: FastAPI, db: TursoClient) -> None:
+    """Initialize PrepService with adapters.
+
+    Creates adapters based on available credentials and sets up
+    the PrepService singleton.
+    """
+    from src.adapters.calendar_adapter import CalendarAdapter
+    from src.adapters.drive_adapter import DriveAdapter
+    from src.adapters.slack_adapter import SlackAdapter
+    from src.prep.context_gatherer import ContextGatherer
+    from src.prep.item_matcher import ItemMatcher
+    from src.prep.prep_service import PrepService
+    from src.prep.schemas import PrepConfig
+
+    # Create adapters - they handle missing credentials gracefully
+    calendar_adapter = CalendarAdapter()
+    slack_adapter = SlackAdapter()
+
+    # ItemMatcher needs database
+    item_matcher = ItemMatcher(db)
+
+    # ContextGatherer with optional adapters
+    drive_adapter = None
+    if os.environ.get("GOOGLE_SHEETS_CREDENTIALS"):
+        drive_adapter = DriveAdapter()
+
+    context_gatherer = ContextGatherer(
+        item_matcher=item_matcher,
+        drive_adapter=drive_adapter,
+        slack_adapter=slack_adapter,
+        fts_service=app.state.fts_service,
+    )
+
+    # Create and register PrepService
+    config = PrepConfig()
+    prep_service = PrepService(
+        calendar_adapter=calendar_adapter,
+        slack_adapter=slack_adapter,
+        item_matcher=item_matcher,
+        context_gatherer=context_gatherer,
+        config=config,
+    )
+    PrepService.set_instance(prep_service)
+    app.state.prep_service = prep_service
+    logger.info("PrepService initialized")
+
+
+def _get_prep_scheduler_context():
+    """Get prep scheduler lifespan context manager.
+
+    Returns a no-op context if scheduler is disabled via environment.
+    """
+    from contextlib import asynccontextmanager
+
+    from src.prep.scheduler import prep_scheduler_lifespan
+
+    # Allow disabling scheduler for tests
+    if os.environ.get("DISABLE_PREP_SCHEDULER"):
+
+        @asynccontextmanager
+        async def noop_context():
+            yield
+
+        return noop_context()
+
+    return prep_scheduler_lifespan()
 
 
 @asynccontextmanager
@@ -98,7 +167,11 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     app.state.open_items_repo = OpenItemsRepository(db)
     logger.info("Search and dashboard services initialized")
 
-    yield
+    # Initialize meeting prep service and scheduler
+    async with AsyncExitStack() as stack:
+        await _initialize_prep_service(app, db)
+        await stack.enter_async_context(_get_prep_scheduler_context())
+        yield
 
     # Shutdown
     logger.info("Shutting down TPM Admin Agent...")

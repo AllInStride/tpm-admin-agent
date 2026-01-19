@@ -8,6 +8,7 @@ from src.api.identity import router as identity_router
 from src.api.integration import router as integration_router
 from src.api.meetings import router as meetings_router
 from src.api.output import router as output_router
+from src.api.prep import router as prep_router
 from src.api.search import search_router
 
 api_router = APIRouter()
@@ -23,3 +24,5 @@ api_router.include_router(output_router, prefix="/output", tags=["output"])
 api_router.include_router(integration_router)
 # Search and dashboard endpoints
 api_router.include_router(search_router)
+# Meeting prep endpoints
+api_router.include_router(prep_router)
