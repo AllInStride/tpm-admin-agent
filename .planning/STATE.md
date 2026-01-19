@@ -12,16 +12,16 @@ See: .planning/PROJECT.md (updated 2025-01-17)
 Phase: 6 of 9 (System Integration)
 Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-01-19 - Completed 06-02-PLAN.md
+Last activity: 2026-01-19 - Completed 06-01-PLAN.md
 
 Progress: [========..] 75%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15
-- Average duration: 4.2 min
-- Total execution time: 63 min
+- Total plans completed: 16
+- Average duration: 4.4 min
+- Total execution time: 71 min
 
 **By Phase:**
 
@@ -31,10 +31,10 @@ Progress: [========..] 75%
 | 03 | 4/4 | 14 min | 3.5 min |
 | 04 | 4/4 | 19 min | 4.8 min |
 | 05 | 3/3 | 12 min | 4.0 min |
-| 06 | 1/3 | 7 min | 7.0 min |
+| 06 | 2/3 | 15 min | 7.5 min |
 
 **Recent Trend:**
-- Last 5 plans: 05-01 (5 min), 05-02 (3 min), 05-03 (4 min), 06-02 (7 min)
+- Last 5 plans: 05-02 (3 min), 05-03 (4 min), 06-01 (8 min), 06-02 (7 min)
 - Trend: Stable execution pace
 
 *Updated after each plan completion*
@@ -90,6 +90,10 @@ Progress: [========..] 75%
 | 05-03 | Tenacity retry: 5 attempts, 4-60s backoff | Handle transient Google API failures |
 | 05-03 | OutputRouter coordinates adapters | Single orchestration point for output pipeline |
 | 05-03 | Minutes filename: {date}-{title-slug}.md | Sortable by date, human-readable |
+| 06-01 | BATCH_SIZE=100 for Smartsheet add_rows | Conservative (API max 500) to avoid rate limiting |
+| 06-01 | Dynamic column ID fetch per write | Column IDs are sheet-specific; cannot hardcode |
+| 06-01 | row.to_bottom=True for new rows | Required per RESEARCH.md for add_rows to work |
+| 06-01 | Date format as YYYY-MM-DD strings | Smartsheet DATE columns expect ISO format |
 | 06-02 | lookup_user_by_email returns full user dict | Enables downstream code to access user ID without re-querying |
 | 06-02 | verify_member delegates to lookup_user_by_email | Single code path for user lookup, DRY |
 | 06-02 | Audit log in-memory with copy-on-read | Simple MVP, prevents external mutation |
@@ -106,6 +110,15 @@ None yet.
 
 Phase 6: System Integration in progress.
 
+**Plan 06-01 complete:**
+- smartsheet-python-sdk>=3.7.1 added to dependencies
+- SmartsheetAdapter with create_sheet, write_raid_items, health_check
+- BATCH_SIZE=100 chunking for add_rows calls
+- Dynamic column ID mapping via _get_column_map
+- Integration schemas: SmartsheetConfig, SmartsheetWriteResult, RaidRowData
+- RAID_COLUMNS constant with standard TPM column definitions
+- 19 new tests passing
+
 **Plan 06-02 complete:**
 - SlackAdapter extended with send_dm and lookup_user_by_email
 - NotificationService with notify_owner and audit trail
@@ -113,10 +126,10 @@ Phase 6: System Integration in progress.
 - NotificationResult and NotificationRecord schemas
 - 31 new tests passing (17 slack + 14 notification)
 
-**Test coverage:** 355 tests passing
+**Test coverage:** 374 tests passing
 
 ## Session Continuity
 
 Last session: 2026-01-19
-Stopped at: Completed 06-02-PLAN.md
+Stopped at: Completed 06-01-PLAN.md
 Resume file: None
