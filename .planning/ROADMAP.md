@@ -14,7 +14,7 @@ This roadmap delivers a Meeting-to-Execution Agent that converts Zoom transcript
 - [x] **Phase 2: Transcript Ingestion** - Upload and parse Zoom transcripts with speaker identification
 - [x] **Phase 3: RAID Extraction** - Extract action items, decisions, risks, issues with confidence scores
 - [x] **Phase 4: Identity Resolution** - Match transcript names to project roster and external systems
-- [ ] **Phase 5: Output Generation** - Generate meeting minutes and establish adapter pattern
+- [x] **Phase 5: Output Generation** - Generate meeting minutes and establish adapter pattern
 - [ ] **Phase 6: System Integration** - Write artifacts to Smartsheet and notify owners
 - [ ] **Phase 7: Cross-Meeting Intelligence** - Search past meetings and track open items
 - [ ] **Phase 8: Meeting Prep** - Surface context and open items before meetings
@@ -101,9 +101,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 05-01-PLAN.md — Output schemas, Jinja2 renderer, default templates (Wave 1)
-- [ ] 05-02-PLAN.md — OutputAdapter protocol, SheetsAdapter, DriveAdapter (Wave 2)
-- [ ] 05-03-PLAN.md — OutputRouter, retry queue, output API endpoint (Wave 3)
+- [x] 05-01-PLAN.md — Output schemas, Jinja2 renderer, default templates (Wave 1)
+- [x] 05-02-PLAN.md — OutputAdapter protocol, SheetsAdapter, DriveAdapter (Wave 2)
+- [x] 05-03-PLAN.md — OutputRouter, retry queue, output API endpoint (Wave 3)
 
 ### Phase 6: System Integration
 **Goal**: Extracted artifacts flow to Smartsheet and owners receive notifications
@@ -180,7 +180,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | 2. Transcript Ingestion | 3/3 | Complete | 2026-01-18 |
 | 3. RAID Extraction | 4/4 | Complete | 2026-01-18 |
 | 4. Identity Resolution | 4/4 | Complete | 2026-01-18 |
-| 5. Output Generation | 0/3 | Planned | - |
+| 5. Output Generation | 3/3 | Complete | 2026-01-18 |
 | 6. System Integration | 0/3 | Not started | - |
 | 7. Cross-Meeting Intelligence | 0/3 | Not started | - |
 | 8. Meeting Prep | 0/3 | Not started | - |

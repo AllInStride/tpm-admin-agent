@@ -30,11 +30,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Output
 
-- [ ] **OUT-01**: System generates meeting minutes from template
-- [ ] **OUT-02**: User can select target system (Google Sheets, Smartsheet, Jira)
+- [x] **OUT-01**: System generates meeting minutes from template
+- [x] **OUT-02**: User can select target system (Google Sheets, Smartsheet, Jira)
 - [ ] **OUT-03**: System creates rows/items in selected target for action items, risks, issues
 - [ ] **OUT-04**: System notifies owners of assigned items
-- [ ] **OUT-05**: Architecture uses adapter pattern for integrations
+- [x] **OUT-05**: Architecture uses adapter pattern for integrations
 
 ### Cross-Meeting Intelligence
 
@@ -119,11 +119,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | IDN-02 | Phase 4 | Complete |
 | IDN-03 | Phase 4 | Complete |
 | IDN-04 | Phase 4 | Complete |
-| OUT-01 | Phase 5 | Pending |
-| OUT-02 | Phase 5 | Pending |
+| OUT-01 | Phase 5 | Complete |
+| OUT-02 | Phase 5 | Complete |
 | OUT-03 | Phase 6 | Pending |
 | OUT-04 | Phase 6 | Pending |
-| OUT-05 | Phase 5 | Pending |
+| OUT-05 | Phase 5 | Complete |
 | XMT-01 | Phase 7 | Pending |
 | XMT-02 | Phase 7 | Pending |
 | PRP-01 | Phase 8 | Pending |
@@ -141,4 +141,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2025-01-17*
-*Last updated: 2025-01-17 after roadmap creation*
+*Last updated: 2026-01-18 after Phase 5 completion*
