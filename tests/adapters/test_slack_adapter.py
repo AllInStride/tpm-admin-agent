@@ -42,6 +42,72 @@ class TestSlackAdapterInit:
             adapter._get_client()
 
 
+class TestLookupUserByEmail:
+    """Tests for lookup_user_by_email method."""
+
+    @pytest.mark.asyncio
+    async def test_returns_user_when_found(self, mock_web_client):
+        """Should return user dict when found by email."""
+        mock_client = MagicMock()
+        mock_user = {
+            "id": "U123",
+            "name": "john",
+            "profile": {"email": "john@example.com"},
+        }
+        mock_client.users_lookupByEmail.return_value = {"user": mock_user}
+        mock_web_client.return_value = mock_client
+
+        adapter = SlackAdapter(bot_token="xoxb-test")
+        result = await adapter.lookup_user_by_email("john@example.com")
+
+        assert result == mock_user
+        mock_client.users_lookupByEmail.assert_called_once_with(
+            email="john@example.com"
+        )
+
+    @pytest.mark.asyncio
+    async def test_returns_none_when_not_found(self, mock_web_client):
+        """Should return None when users_not_found error."""
+        mock_client = MagicMock()
+        mock_response = MagicMock()
+        mock_response.get.return_value = "users_not_found"
+        error = SlackApiError("User not found", response=mock_response)
+        mock_client.users_lookupByEmail.side_effect = error
+        mock_web_client.return_value = mock_client
+
+        adapter = SlackAdapter(bot_token="xoxb-test")
+        result = await adapter.lookup_user_by_email("unknown@example.com")
+
+        assert result is None
+
+    @pytest.mark.asyncio
+    async def test_returns_none_on_api_error(self, mock_web_client):
+        """Should return None on API errors."""
+        mock_client = MagicMock()
+        mock_response = MagicMock()
+        mock_response.get.return_value = "rate_limited"
+        error = SlackApiError("Rate limited", response=mock_response)
+        mock_client.users_lookupByEmail.side_effect = error
+        mock_web_client.return_value = mock_client
+
+        adapter = SlackAdapter(bot_token="xoxb-test")
+        result = await adapter.lookup_user_by_email("john@example.com")
+
+        assert result is None
+
+    @pytest.mark.asyncio
+    async def test_returns_none_on_generic_exception(self, mock_web_client):
+        """Should return None on unexpected errors."""
+        mock_client = MagicMock()
+        mock_client.users_lookupByEmail.side_effect = RuntimeError("Connection failed")
+        mock_web_client.return_value = mock_client
+
+        adapter = SlackAdapter(bot_token="xoxb-test")
+        result = await adapter.lookup_user_by_email("john@example.com")
+
+        assert result is None
+
+
 class TestVerifyMember:
     """Tests for verify_member method."""
 
@@ -49,7 +115,12 @@ class TestVerifyMember:
     async def test_returns_true_when_found(self, mock_web_client):
         """Should return True when user found by email."""
         mock_client = MagicMock()
-        mock_client.users_lookupByEmail.return_value = {"ok": True}
+        mock_user = {
+            "id": "U123",
+            "name": "john",
+            "profile": {"email": "john@example.com"},
+        }
+        mock_client.users_lookupByEmail.return_value = {"user": mock_user}
         mock_web_client.return_value = mock_client
 
         adapter = SlackAdapter(bot_token="xoxb-test")
@@ -101,6 +172,60 @@ class TestVerifyMember:
         result = await adapter.verify_member("john@example.com")
 
         assert result is False
+
+
+class TestSendDm:
+    """Tests for send_dm method."""
+
+    @pytest.mark.asyncio
+    async def test_sends_dm_successfully(self, mock_web_client):
+        """Should send DM and return success result."""
+        mock_client = MagicMock()
+        mock_client.chat_postMessage.return_value = {
+            "ok": True,
+            "ts": "1234567890.123456",
+        }
+        mock_web_client.return_value = mock_client
+
+        adapter = SlackAdapter(bot_token="xoxb-test")
+        result = await adapter.send_dm("U123", "Hello, world!")
+
+        assert result == {"success": True, "ts": "1234567890.123456"}
+        mock_client.chat_postMessage.assert_called_once_with(
+            channel="U123",
+            text="Hello, world!",
+        )
+
+    @pytest.mark.asyncio
+    async def test_returns_error_on_api_failure(self, mock_web_client):
+        """Should return error dict on API failure."""
+        mock_client = MagicMock()
+        mock_response = MagicMock()
+        mock_response.get.return_value = "channel_not_found"
+        error = SlackApiError("Channel not found", response=mock_response)
+        mock_client.chat_postMessage.side_effect = error
+        mock_web_client.return_value = mock_client
+
+        adapter = SlackAdapter(bot_token="xoxb-test")
+        result = await adapter.send_dm("U123", "Hello!")
+
+        assert result == {"success": False, "error": "channel_not_found"}
+
+    @pytest.mark.asyncio
+    async def test_handles_unknown_error(self, mock_web_client):
+        """Should return unknown_error on unexpected failure."""
+        mock_client = MagicMock()
+        mock_response = MagicMock()
+        mock_response.get.return_value = None  # No error code
+        error = SlackApiError("Unknown error", response=mock_response)
+        mock_client.chat_postMessage.side_effect = error
+        mock_web_client.return_value = mock_client
+
+        adapter = SlackAdapter(bot_token="xoxb-test")
+        result = await adapter.send_dm("U123", "Hello!")
+
+        assert result["success"] is False
+        assert result["error"] is None or result["error"] == "unknown_error"
 
 
 class TestGetChannelMembers:

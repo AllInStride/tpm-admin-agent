@@ -41,6 +41,36 @@ class SlackAdapter:
             self._client = WebClient(token=self._token)
         return self._client
 
+    async def lookup_user_by_email(self, email: str) -> dict | None:
+        """Look up Slack user by email address.
+
+        Args:
+            email: Email address to look up
+
+        Returns:
+            User dict with 'id', 'name', 'profile' or None if not found
+        """
+        try:
+            client = self._get_client()
+            result = client.users_lookupByEmail(email=email)
+            return result.get("user")
+        except SlackApiError as e:
+            if e.response.get("error") == "users_not_found":
+                return None
+            logger.warning(
+                "Slack API error looking up user",
+                email=email,
+                error=str(e),
+            )
+            return None
+        except Exception as e:
+            logger.warning(
+                "Error looking up Slack user",
+                email=email,
+                error=str(e),
+            )
+            return None
+
     async def verify_member(self, email: str) -> bool:
         """Check if email exists as Slack workspace member.
 
@@ -50,27 +80,38 @@ class SlackAdapter:
         Returns:
             True if member exists in workspace
         """
+        user = await self.lookup_user_by_email(email)
+        return user is not None
+
+    async def send_dm(
+        self,
+        user_id: str,
+        message: str,
+    ) -> dict:
+        """Send direct message to a Slack user.
+
+        Args:
+            user_id: Slack user ID (not email)
+            message: Message text (supports mrkdwn formatting)
+
+        Returns:
+            Dict with 'success' and 'ts' (timestamp) or 'error'
+        """
         try:
             client = self._get_client()
-            # Use users.lookupByEmail API
-            result = client.users_lookupByEmail(email=email)
-            return result.get("ok", False)
+            response = client.chat_postMessage(
+                channel=user_id,  # DM channel opened automatically
+                text=message,
+            )
+            return {"success": True, "ts": response["ts"]}
         except SlackApiError as e:
-            if e.response.get("error") == "users_not_found":
-                return False
+            error = e.response.get("error", "unknown_error")
             logger.warning(
-                "Slack API error verifying member",
-                email=email,
-                error=str(e),
+                "Failed to send Slack DM",
+                user_id=user_id,
+                error=error,
             )
-            return False
-        except Exception as e:
-            logger.warning(
-                "Error verifying Slack member",
-                email=email,
-                error=str(e),
-            )
-            return False
+            return {"success": False, "error": error}
 
     async def get_channel_members(self, channel_id: str) -> set[str]:
         """Get email addresses of channel members.
