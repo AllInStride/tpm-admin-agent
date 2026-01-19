@@ -1,8 +1,10 @@
 """Integration-specific schemas for external system connections.
 
-Defines models for Smartsheet configuration, write results, and
-column definitions for RAID item tracking.
+Defines models for Smartsheet configuration, write results,
+column definitions for RAID item tracking, and notification schemas.
 """
+
+from datetime import datetime
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -121,3 +123,33 @@ RAID_COLUMNS = [
         "type": "TEXT_NUMBER",
     },
 ]
+
+
+class NotificationResult(BaseModel):
+    """Result of a notification attempt."""
+
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    success: bool = Field(description="Whether notification was sent successfully")
+    recipient_email: str = Field(description="Email address of the recipient")
+    recipient_slack_id: str | None = Field(
+        default=None, description="Slack user ID if found"
+    )
+    message_ts: str | None = Field(default=None, description="Slack message timestamp")
+    error: str | None = Field(default=None, description="Error message if failed")
+
+
+class NotificationRecord(BaseModel):
+    """Audit record for a sent notification."""
+
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    recipient_email: str = Field(description="Email address of the recipient")
+    item_description: str = Field(description="Description of the notified item")
+    item_type: str = Field(description="RAID item type")
+    smartsheet_url: str | None = Field(
+        default=None, description="Link to Smartsheet row"
+    )
+    sent_at: datetime = Field(description="When notification was sent")
+    success: bool = Field(description="Whether notification succeeded")
+    error: str | None = Field(default=None, description="Error if notification failed")
