@@ -15,7 +15,7 @@ This roadmap delivers a Meeting-to-Execution Agent that converts Zoom transcript
 - [x] **Phase 3: RAID Extraction** - Extract action items, decisions, risks, issues with confidence scores
 - [x] **Phase 4: Identity Resolution** - Match transcript names to project roster and external systems
 - [x] **Phase 5: Output Generation** - Generate meeting minutes and establish adapter pattern
-- [ ] **Phase 6: System Integration** - Write artifacts to Smartsheet and notify owners
+- [x] **Phase 6: System Integration** - Write artifacts to Smartsheet and notify owners
 - [ ] **Phase 7: Cross-Meeting Intelligence** - Search past meetings and track open items
 - [ ] **Phase 8: Meeting Prep** - Surface context and open items before meetings
 - [ ] **Phase 9: Communication Automation** - Generate status updates, escalations, exec talking points
@@ -117,9 +117,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — SmartsheetAdapter with batch writes and sheet creation (Wave 1)
-- [ ] 06-02-PLAN.md — NotificationService with Slack DMs and audit trail (Wave 1)
-- [ ] 06-03-PLAN.md — IntegrationRouter and POST /integration endpoint (Wave 2)
+- [x] 06-01-PLAN.md — SmartsheetAdapter with batch writes and sheet creation (Wave 1)
+- [x] 06-02-PLAN.md — NotificationService with Slack DMs and audit trail (Wave 1)
+- [x] 06-03-PLAN.md — IntegrationRouter and POST /integration endpoint (Wave 2)
 
 ### Phase 7: Cross-Meeting Intelligence
 **Goal**: User can search and track items across multiple meetings
@@ -181,7 +181,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | 3. RAID Extraction | 4/4 | Complete | 2026-01-18 |
 | 4. Identity Resolution | 4/4 | Complete | 2026-01-18 |
 | 5. Output Generation | 3/3 | Complete | 2026-01-18 |
-| 6. System Integration | 0/3 | Planned | - |
+| 6. System Integration | 3/3 | Complete | 2026-01-19 |
 | 7. Cross-Meeting Intelligence | 0/3 | Not started | - |
 | 8. Meeting Prep | 0/3 | Not started | - |
 | 9. Communication Automation | 0/4 | Not started | - |
