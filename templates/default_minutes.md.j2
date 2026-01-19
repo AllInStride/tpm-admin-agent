@@ -1,0 +1,73 @@
+# Meeting Minutes: {{ meeting_title }}
+
+**Date:** {{ meeting_date.strftime('%Y-%m-%d %H:%M') }}
+{% if duration_minutes %}**Duration:** {{ duration_minutes }} minutes{% endif %}
+**Attendees:** {{ attendees | join(", ") if attendees else "None recorded" }}
+
+---
+
+## Decisions
+
+{% for decision in decisions %}
+### {{ loop.index }}. {{ decision.description }}{% if decision.confidence < 0.7 %} [LOW CONFIDENCE]{% endif %}
+
+{% if decision.rationale %}**Rationale:** {{ decision.rationale }}{% endif %}
+{% if decision.alternatives %}**Alternatives considered:** {{ decision.alternatives | join("; ") }}{% endif %}
+
+{% endfor %}
+{% if not decisions %}*No decisions recorded.*{% endif %}
+
+---
+
+## Action Items
+
+| # | Action | Owner | Due Date |
+|---|--------|-------|----------|
+{% for action in action_items %}
+| {{ loop.index }} | {{ action.description }}{% if action.confidence < 0.7 %} [?]{% endif %} | {{ action.assignee_name or "Unassigned" }} | {{ action.due_date or "TBD" }} |
+{% endfor %}
+{% if not action_items %}
+| - | *No action items recorded.* | - | - |
+{% endif %}
+
+---
+
+## Risks
+
+{% for risk in risks %}
+### {{ loop.index }}. {{ risk.description }}{% if risk.confidence < 0.7 %} [LOW CONFIDENCE]{% endif %}
+
+- **Severity:** {{ risk.severity }}
+- **Owner:** {{ risk.owner_name or "Unassigned" }}
+{% if risk.mitigation %}- **Mitigation:** {{ risk.mitigation }}{% endif %}
+
+{% endfor %}
+{% if not risks %}*No risks identified.*{% endif %}
+
+---
+
+## Issues
+
+{% for issue in issues %}
+### {{ loop.index }}. {{ issue.description }}{% if issue.confidence < 0.7 %} [LOW CONFIDENCE]{% endif %}
+
+- **Priority:** {{ issue.priority }}
+- **Status:** {{ issue.status }}
+- **Owner:** {{ issue.owner_name or "Unassigned" }}
+{% if issue.impact %}- **Impact:** {{ issue.impact }}{% endif %}
+
+{% endfor %}
+{% if not issues %}*No issues raised.*{% endif %}
+
+---
+
+## Next Steps
+
+{% for step in next_steps %}
+{{ loop.index }}. {{ step }}
+{% endfor %}
+{% if not next_steps %}*No next steps identified.*{% endif %}
+
+---
+
+*Generated: {{ generated_at.strftime('%Y-%m-%d %H:%M UTC') }}*

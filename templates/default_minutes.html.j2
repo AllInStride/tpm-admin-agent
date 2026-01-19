@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Minutes: {{ meeting_title }}</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #444;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .metadata {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .metadata p {
+            margin: 5px 0;
+        }
+        .low-confidence {
+            color: #b94a48;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .empty-section {
+            color: #666;
+            font-style: italic;
+        }
+        .section-item {
+            background-color: #fafafa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 3px solid #ddd;
+        }
+        .section-item.decision {
+            border-left-color: #0066cc;
+        }
+        .section-item.risk {
+            border-left-color: #f0ad4e;
+        }
+        .section-item.issue {
+            border-left-color: #d9534f;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 30px 0;
+        }
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 0.85em;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        @media print {
+            body {
+                max-width: none;
+                padding: 10px;
+            }
+            .section-item {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Meeting Minutes: {{ meeting_title }}</h1>
+
+    <div class="metadata">
+        <p><strong>Date:</strong> {{ meeting_date.strftime('%Y-%m-%d %H:%M') }}</p>
+        {% if duration_minutes %}<p><strong>Duration:</strong> {{ duration_minutes }} minutes</p>{% endif %}
+        <p><strong>Attendees:</strong> {{ attendees | join(", ") if attendees else "None recorded" }}</p>
+    </div>
+
+    <hr>
+
+    <h2>Decisions</h2>
+    {% for decision in decisions %}
+    <div class="section-item decision">
+        <h3>{{ loop.index }}. {{ decision.description }}{% if decision.confidence < 0.7 %} <span class="low-confidence">[LOW CONFIDENCE]</span>{% endif %}</h3>
+        {% if decision.rationale %}<p><strong>Rationale:</strong> {{ decision.rationale }}</p>{% endif %}
+        {% if decision.alternatives %}<p><strong>Alternatives considered:</strong> {{ decision.alternatives | join("; ") }}</p>{% endif %}
+    </div>
+    {% endfor %}
+    {% if not decisions %}<p class="empty-section">No decisions recorded.</p>{% endif %}
+
+    <hr>
+
+    <h2>Action Items</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Action</th>
+                <th>Owner</th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for action in action_items %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ action.description }}{% if action.confidence < 0.7 %} <span class="low-confidence">[?]</span>{% endif %}</td>
+                <td>{{ action.assignee_name or "Unassigned" }}</td>
+                <td>{{ action.due_date or "TBD" }}</td>
+            </tr>
+            {% endfor %}
+            {% if not action_items %}
+            <tr>
+                <td colspan="4" class="empty-section">No action items recorded.</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Risks</h2>
+    {% for risk in risks %}
+    <div class="section-item risk">
+        <h3>{{ loop.index }}. {{ risk.description }}{% if risk.confidence < 0.7 %} <span class="low-confidence">[LOW CONFIDENCE]</span>{% endif %}</h3>
+        <ul>
+            <li><strong>Severity:</strong> {{ risk.severity }}</li>
+            <li><strong>Owner:</strong> {{ risk.owner_name or "Unassigned" }}</li>
+            {% if risk.mitigation %}<li><strong>Mitigation:</strong> {{ risk.mitigation }}</li>{% endif %}
+        </ul>
+    </div>
+    {% endfor %}
+    {% if not risks %}<p class="empty-section">No risks identified.</p>{% endif %}
+
+    <hr>
+
+    <h2>Issues</h2>
+    {% for issue in issues %}
+    <div class="section-item issue">
+        <h3>{{ loop.index }}. {{ issue.description }}{% if issue.confidence < 0.7 %} <span class="low-confidence">[LOW CONFIDENCE]</span>{% endif %}</h3>
+        <ul>
+            <li><strong>Priority:</strong> {{ issue.priority }}</li>
+            <li><strong>Status:</strong> {{ issue.status }}</li>
+            <li><strong>Owner:</strong> {{ issue.owner_name or "Unassigned" }}</li>
+            {% if issue.impact %}<li><strong>Impact:</strong> {{ issue.impact }}</li>{% endif %}
+        </ul>
+    </div>
+    {% endfor %}
+    {% if not issues %}<p class="empty-section">No issues raised.</p>{% endif %}
+
+    <hr>
+
+    <h2>Next Steps</h2>
+    {% if next_steps %}
+    <ol>
+        {% for step in next_steps %}
+        <li>{{ step }}</li>
+        {% endfor %}
+    </ol>
+    {% else %}
+    <p class="empty-section">No next steps identified.</p>
+    {% endif %}
+
+    <div class="footer">
+        <p>Generated: {{ generated_at.strftime('%Y-%m-%d %H:%M UTC') }}</p>
+    </div>
+</body>
+</html>

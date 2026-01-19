@@ -1,5 +1,6 @@
 """Output module for meeting minutes generation and rendering."""
 
+from src.output.renderer import MinutesRenderer
 from src.output.schemas import (
     ActionItemData,
     DecisionItem,
@@ -15,6 +16,7 @@ __all__ = [
     "DecisionItem",
     "IssueItem",
     "MinutesContext",
+    "MinutesRenderer",
     "RaidBundle",
     "RenderedMinutes",
     "RiskItem",
