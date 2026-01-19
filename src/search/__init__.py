@@ -1,9 +1,14 @@
 """Search module for cross-meeting intelligence.
 
 Provides open item tracking, dashboard queries, item history,
-full-text search, and read projections.
+full-text search, duplicate detection, and read projections.
 """
 
+from src.search.duplicate_detector import (
+    DuplicateCheckResult,
+    DuplicateDetector,
+    DuplicateMatch,
+)
 from src.search.fts_service import (
     FTSService,
     ParsedQuery,
@@ -30,6 +35,9 @@ from src.search.schemas import (
 
 __all__ = [
     "CLOSED_STATUSES",
+    "DuplicateCheckResult",
+    "DuplicateDetector",
+    "DuplicateMatch",
     "FTSService",
     "GroupedOpenItems",
     "ItemHistory",
