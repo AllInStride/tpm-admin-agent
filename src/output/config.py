@@ -36,6 +36,25 @@ class ProjectOutputConfig(BaseModel):
         description="Which output adapters to use",
     )
 
+    # Smartsheet settings
+    smartsheet_sheet_id: int | None = Field(
+        default=None, description="Smartsheet sheet ID for RAID items"
+    )
+    smartsheet_folder_id: int | None = Field(
+        default=None, description="Folder ID for auto-creating sheets"
+    )
+    auto_create_sheet: bool = Field(
+        default=True, description="Auto-create sheet if missing"
+    )
+
+    # Notification settings
+    notify_owners: bool = Field(
+        default=True, description="Send Slack DMs to action item owners"
+    )
+    fallback_email: str | None = Field(
+        default=None, description="Fallback email for unresolved owners"
+    )
+
     @classmethod
     def default(cls) -> "ProjectOutputConfig":
         """Create a default config with no destinations.

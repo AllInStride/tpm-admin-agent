@@ -4,6 +4,7 @@ This module provides orchestration for writing to external systems
 like Smartsheet and sending notifications via Slack.
 """
 
+from src.integration.integration_router import IntegrationResult, IntegrationRouter
 from src.integration.notification_service import NotificationService
 from src.integration.schemas import (
     RAID_COLUMNS,
@@ -15,6 +16,8 @@ from src.integration.schemas import (
 )
 
 __all__ = [
+    "IntegrationResult",
+    "IntegrationRouter",
     "NotificationRecord",
     "NotificationResult",
     "NotificationService",
