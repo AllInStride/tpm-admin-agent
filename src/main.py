@@ -11,6 +11,16 @@ from src.config import settings
 from src.db.turso import TursoClient
 from src.events.bus import EventBus
 from src.events.store import EventStore
+from src.events.types import (
+    ActionItemExtracted,
+    DecisionExtracted,
+    IssueExtracted,
+    MeetingCreated,
+    RiskExtracted,
+    TranscriptParsed,
+)
+from src.repositories.projection_repo import ProjectionRepository
+from src.search.projections import ProjectionBuilder
 
 # Configure logging
 logging.basicConfig(
@@ -54,6 +64,32 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     event_bus = EventBus(store=event_store)
     app.state.event_bus = event_bus
     logger.info("Event bus initialized")
+
+    # Initialize projection repository and builder
+    projection_repo = ProjectionRepository(db)
+    await projection_repo.initialize()
+    app.state.projection_repo = projection_repo
+    logger.info("Projection repository initialized")
+
+    projection_builder = ProjectionBuilder(event_store, projection_repo)
+    app.state.projection_builder = projection_builder
+
+    # Subscribe projection builder to all RAID-related events
+    event_types = [
+        MeetingCreated,
+        TranscriptParsed,
+        ActionItemExtracted,
+        DecisionExtracted,
+        RiskExtracted,
+        IssueExtracted,
+    ]
+
+    for event_type in event_types:
+        event_bus.subscribe(event_type, projection_builder.handle_event_object)
+
+    logger.info(
+        f"Projection builder subscribed to {len(event_types)} event types"
+    )
 
     yield
 
