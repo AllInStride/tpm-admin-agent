@@ -144,12 +144,12 @@ Plans:
   1. System surfaces open items from previous meetings with same attendees
   2. System surfaces relevant context from docs/Slack related to meeting agenda
   3. System delivers prep summary 10 minutes before meeting start time
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 08-01: Open item surfacing by attendee overlap
-- [ ] 08-02: Context retrieval from docs and Slack
-- [ ] 08-03: Scheduled prep delivery
+- [ ] 08-01-PLAN.md — Prep schemas, CalendarAdapter extension, ItemMatcher
+- [ ] 08-02-PLAN.md — SlackAdapter/DriveAdapter extensions, ContextGatherer
+- [ ] 08-03-PLAN.md — PrepService, APScheduler, prep API endpoints
 
 ### Phase 9: Communication Automation
 **Goal**: System generates communication artifacts for different audiences
@@ -183,7 +183,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | 5. Output Generation | 3/3 | Complete | 2026-01-18 |
 | 6. System Integration | 3/3 | Complete | 2026-01-19 |
 | 7. Cross-Meeting Intelligence | 3/3 | Complete | 2026-01-19 |
-| 8. Meeting Prep | 0/3 | Not started | - |
+| 8. Meeting Prep | 0/3 | Planned | - |
 | 9. Communication Automation | 0/4 | Not started | - |
 
 ---
@@ -195,5 +195,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 *Phase 5 planned: 2026-01-18*
 *Phase 6 planned: 2026-01-19*
 *Phase 7 planned: 2026-01-19*
-*Total plans: 30*
+*Phase 8 planned: 2026-01-19*
+*Total plans: 33*
 *Total v1 requirements: 26 (100% coverage)*
