@@ -19,6 +19,7 @@ dependencies = [
     "python-multipart>=0.0.21",
     "rapidfuzz>=3.14.0",
     "slack-sdk>=3.35.0",
+    "smartsheet-python-sdk>=3.7.1",
     "structlog>=25.5.0",
     "tenacity>=9.0.0",
     "uvicorn>=0.40.0",

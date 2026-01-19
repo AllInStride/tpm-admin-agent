@@ -1812,6 +1812,18 @@ wheels = [
 ]
 
 [[package]]
+name = "requests-toolbelt"
+version = "1.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f3/61/d7545dafb7ac2230c70d38d31cbfe4cc64f7144dc41f6e4e4b78ecd9f5bb/requests-toolbelt-1.0.0.tar.gz", hash = "sha256:7681a0a3d047012b5bdc0ee37d7f8f07ebe76ab08caeccfc3921ce23c88d5bc6", size = 206888, upload-time = "2023-05-01T04:11:33.229Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3f/51/d4db610ef29373b879047326cbf6fa98b6c1969d6f6dc423279de2b1be2c/requests_toolbelt-1.0.0-py2.py3-none-any.whl", hash = "sha256:cccfdd665f0a24fcf4726e690f65639d272bb0637b9b92dfd91a5568ccf6bd06", size = 54481, upload-time = "2023-05-01T04:11:28.427Z" },
+]
+
+[[package]]
 name = "roman-numerals"
 version = "4.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1874,6 +1886,22 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/b6/dd/645f3eb93fce38eadbb649e85684730b1fc3906c2674ca59bddc2ca2bd2e/slack_sdk-3.39.0.tar.gz", hash = "sha256:6a56be10dc155c436ff658c6b776e1c082e29eae6a771fccf8b0a235822bbcb1", size = 247207, upload-time = "2025-11-20T15:27:57.556Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ef/1f/32bcf088e535c1870b1a1f2e3b916129c66fdfe565a793316317241d41e5/slack_sdk-3.39.0-py2.py3-none-any.whl", hash = "sha256:b1556b2f5b8b12b94e5ea3f56c4f2c7f04462e4e1013d325c5764ff118044fa8", size = 309850, upload-time = "2025-11-20T15:27:55.729Z" },
+]
+
+[[package]]
+name = "smartsheet-python-sdk"
+version = "3.7.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "certifi" },
+    { name = "python-dateutil" },
+    { name = "requests" },
+    { name = "requests-toolbelt" },
+    { name = "six" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/bf/8e/5277f9723803f948898c00915429edd600033a698afbe7e3556818b5e018/smartsheet_python_sdk-3.7.1.tar.gz", hash = "sha256:f0b7388813d4c9d129f01841ef329158d296b1d03f9a0fdd3577df79cbd71777", size = 138696, upload-time = "2025-12-12T12:19:34.179Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e3/61/1b3100b3c876b2f5f98f8d966ca1f8dfc15ff190cadc638e0b3ef61b599a/smartsheet_python_sdk-3.7.1-py3-none-any.whl", hash = "sha256:60a5cc89416c6d4d63b11b61aa8fcc33852df22356e24e209a534b64eeb45517", size = 245319, upload-time = "2025-12-12T12:19:32.646Z" },
 ]
 
 [[package]]
@@ -2075,6 +2103,7 @@ dependencies = [
     { name = "python-multipart" },
     { name = "rapidfuzz" },
     { name = "slack-sdk" },
+    { name = "smartsheet-python-sdk" },
     { name = "structlog" },
     { name = "tenacity" },
     { name = "uvicorn" },
@@ -2108,6 +2137,7 @@ requires-dist = [
     { name = "python-multipart", specifier = ">=0.0.21" },
     { name = "rapidfuzz", specifier = ">=3.14.0" },
     { name = "slack-sdk", specifier = ">=3.35.0" },
+    { name = "smartsheet-python-sdk", specifier = ">=3.7.1" },
     { name = "structlog", specifier = ">=25.5.0" },
     { name = "tenacity", specifier = ">=9.0.0" },
     { name = "uvicorn", specifier = ">=0.40.0" },
