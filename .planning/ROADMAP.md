@@ -129,12 +129,12 @@ Plans:
   1. User can search across past meeting content (full-text search)
   2. System tracks open items across multiple meetings and surfaces them
   3. User can view item history showing which meetings referenced it
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 07-01: Full-text search index
-- [ ] 07-02: Open item tracking and rollup
-- [ ] 07-03: Item history and meeting linkage
+- [ ] 07-01-PLAN.md — Projection infrastructure with FTS5 search indexes (Wave 1)
+- [ ] 07-02-PLAN.md — Open items repository and status tracking (Wave 1)
+- [ ] 07-03-PLAN.md — FTS service, duplicate detector, and search API endpoints (Wave 2)
 
 ### Phase 8: Meeting Prep
 **Goal**: System proactively surfaces relevant context before meetings start
@@ -182,7 +182,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | 4. Identity Resolution | 4/4 | Complete | 2026-01-18 |
 | 5. Output Generation | 3/3 | Complete | 2026-01-18 |
 | 6. System Integration | 3/3 | Complete | 2026-01-19 |
-| 7. Cross-Meeting Intelligence | 0/3 | Not started | - |
+| 7. Cross-Meeting Intelligence | 0/3 | Planned | - |
 | 8. Meeting Prep | 0/3 | Not started | - |
 | 9. Communication Automation | 0/4 | Not started | - |
 
@@ -194,5 +194,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 *Phase 4 planned: 2026-01-18*
 *Phase 5 planned: 2026-01-18*
 *Phase 6 planned: 2026-01-19*
+*Phase 7 planned: 2026-01-19*
 *Total plans: 30*
 *Total v1 requirements: 26 (100% coverage)*
