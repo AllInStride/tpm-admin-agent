@@ -38,8 +38,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Cross-Meeting Intelligence
 
-- [ ] **XMT-01**: User can search across past meeting content
-- [ ] **XMT-02**: System tracks open items across multiple meetings
+- [x] **XMT-01**: User can search across past meeting content
+- [x] **XMT-02**: System tracks open items across multiple meetings
 
 ### Meeting Prep
 
@@ -124,8 +124,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | OUT-03 | Phase 6 | Complete |
 | OUT-04 | Phase 6 | Complete |
 | OUT-05 | Phase 5 | Complete |
-| XMT-01 | Phase 7 | Pending |
-| XMT-02 | Phase 7 | Pending |
+| XMT-01 | Phase 7 | Complete |
+| XMT-02 | Phase 7 | Complete |
 | PRP-01 | Phase 8 | Pending |
 | PRP-02 | Phase 8 | Pending |
 | PRP-03 | Phase 8 | Pending |
@@ -141,4 +141,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2025-01-17*
-*Last updated: 2026-01-19 after Phase 6 completion*
+*Last updated: 2026-01-19 after Phase 7 completion*

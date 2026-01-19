@@ -16,7 +16,7 @@ This roadmap delivers a Meeting-to-Execution Agent that converts Zoom transcript
 - [x] **Phase 4: Identity Resolution** - Match transcript names to project roster and external systems
 - [x] **Phase 5: Output Generation** - Generate meeting minutes and establish adapter pattern
 - [x] **Phase 6: System Integration** - Write artifacts to Smartsheet and notify owners
-- [ ] **Phase 7: Cross-Meeting Intelligence** - Search past meetings and track open items
+- [x] **Phase 7: Cross-Meeting Intelligence** - Search past meetings and track open items
 - [ ] **Phase 8: Meeting Prep** - Surface context and open items before meetings
 - [ ] **Phase 9: Communication Automation** - Generate status updates, escalations, exec talking points
 
@@ -132,9 +132,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 07-01-PLAN.md — Projection infrastructure with FTS5 search indexes (Wave 1)
-- [ ] 07-02-PLAN.md — Open items repository and status tracking (Wave 1)
-- [ ] 07-03-PLAN.md — FTS service, duplicate detector, and search API endpoints (Wave 2)
+- [x] 07-01-PLAN.md — Projection infrastructure with FTS5 search indexes (Wave 1)
+- [x] 07-02-PLAN.md — Open items repository and status tracking (Wave 1)
+- [x] 07-03-PLAN.md — FTS service, duplicate detector, and search API endpoints (Wave 2)
 
 ### Phase 8: Meeting Prep
 **Goal**: System proactively surfaces relevant context before meetings start
@@ -182,7 +182,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | 4. Identity Resolution | 4/4 | Complete | 2026-01-18 |
 | 5. Output Generation | 3/3 | Complete | 2026-01-18 |
 | 6. System Integration | 3/3 | Complete | 2026-01-19 |
-| 7. Cross-Meeting Intelligence | 0/3 | Planned | - |
+| 7. Cross-Meeting Intelligence | 3/3 | Complete | 2026-01-19 |
 | 8. Meeting Prep | 0/3 | Not started | - |
 | 9. Communication Automation | 0/4 | Not started | - |
 
