@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2025-01-17)
 
 **Core value:** Convert meeting talk into tracked execution artifacts automatically — so TPMs shift from clerical work to strategic orchestration.
-**Current focus:** Phase 7 (Cross-Meeting Intelligence) - Complete
+**Current focus:** Phase 8 (Meeting Prep) - In progress
 
 ## Current Position
 
-Phase: 7 of 9 (Cross-Meeting Intelligence)
-Plan: 3 of 3 in current phase
-Status: Phase complete
-Last activity: 2026-01-19 - Completed 07-03-PLAN.md
+Phase: 8 of 9 (Meeting Prep)
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-01-19 - Completed 08-01-PLAN.md
 
-Progress: [=========.] 87%
+Progress: [=========.] 91%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 20
-- Average duration: 4.9 min
-- Total execution time: 97 min
+- Total plans completed: 21
+- Average duration: 5.0 min
+- Total execution time: 106 min
 
 **By Phase:**
 
@@ -33,9 +33,10 @@ Progress: [=========.] 87%
 | 05 | 3/3 | 12 min | 4.0 min |
 | 06 | 3/3 | 20 min | 6.7 min |
 | 07 | 3/3 | 21 min | 7.0 min |
+| 08 | 1/3 | 9 min | 9.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 06-03 (5 min), 07-01 (4 min), 07-02 (9 min), 07-03 (8 min)
+- Last 5 plans: 07-01 (4 min), 07-02 (9 min), 07-03 (8 min), 08-01 (9 min)
 - Trend: Stable execution pace
 
 *Updated after each plan completion*
@@ -113,6 +114,12 @@ Progress: [=========.] 87%
 | 07-03 | Empty keywords returns empty results | FTS5 MATCH requires keywords; filters alone cannot drive search |
 | 07-03 | BM25 scores converted to absolute values | bm25() returns negative; abs() provides intuitive relevance |
 | 07-03 | Duplicate rejections stored separately | Separation of concerns; doesn't bloat projection table |
+| 08-01 | PrepConfig defaults: lead_time=10min, max_items=10, lookback=90days | Per CONTEXT.md requirements |
+| 08-01 | CalendarAdapter.list_upcoming_events uses asyncio.to_thread | Non-blocking since google-api-python-client is sync |
+| 08-01 | ItemMatcher queries by attendee email OR shared meeting_id | Per CONTEXT.md: match by BOTH attendee AND project association |
+| 08-01 | prioritize_items: overdue first, then type order | Per CONTEXT.md: action>risk>issue>decision |
+| 08-01 | generate_talking_points: heuristic approach | Per RESEARCH.md: simple heuristic first, LLM enhancement future |
+| 08-01 | project_id parameter reserved | Scoping by project_id deferred until project associations exist |
 
 ### Pending Todos
 
@@ -122,42 +129,23 @@ None yet.
 
 None yet.
 
-## Phase 7 Complete
+## Phase 8 In Progress
 
-Phase 7: Cross-Meeting Intelligence complete.
+Phase 8: Meeting Prep in progress.
 
-**Plan 07-01 complete:**
-- Projection schemas: MeetingProjection, RaidItemProjection, TranscriptProjection
-- ProjectionRepository with FTS5 indexes and sync triggers
-- ProjectionBuilder to materialize events into projections
-- Event bus wiring for automatic projection updates
-- rebuild_all() for projection reconstruction
-- 31 new tests passing
+**Plan 08-01 complete:**
+- PrepConfig, CalendarEvent, PrepItem, TalkingPoint, PrepSummary, MeetingPrepRequest schemas
+- CalendarAdapter.list_upcoming_events with asyncio.to_thread
+- ItemMatcher.get_items_for_prep with attendee+meeting filtering
+- prioritize_items: overdue > type > due_date sorting
+- generate_talking_points: heuristic suggestions
+- SlackAdapter.get_channel_history and send_prep_dm extensions
+- 56 new tests passing
 
-**Plan 07-02 complete:**
-- Centralized is_item_open() function
-- CLOSED_STATUSES constant for SQL queries
-- OpenItemsRepository with dashboard queries
-- get_summary() aggregation (single SQL query)
-- get_items() with filtering and grouping
-- close_item() status update
-- get_item_history() timeline queries
-- Filter/summary/history schemas
-- 51 new tests passing
-
-**Plan 07-03 complete:**
-- FTSService with query parsing and FTS5 execution
-- parse_search_query() for filter syntax extraction
-- DuplicateDetector using RapidFuzz token_set_ratio
-- Rejection persistence to avoid re-prompting
-- 7 API endpoints for search and dashboard
-- Services initialized in main.py lifespan
-- 46 new tests passing
-
-**Test coverage:** 513 tests passing
+**Test coverage:** 569 tests passing
 
 ## Session Continuity
 
-Last session: 2026-01-19T17:08:00Z
-Stopped at: Completed 07-03-PLAN.md
+Last session: 2026-01-19T18:39:00Z
+Stopped at: Completed 08-01-PLAN.md
 Resume file: None
