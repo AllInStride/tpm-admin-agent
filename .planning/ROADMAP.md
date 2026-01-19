@@ -98,12 +98,12 @@ Plans:
   1. System generates meeting minutes from customizable template
   2. User can select target system (Google Sheets, Smartsheet, Jira) for output
   3. Integration architecture uses adapter pattern for target systems
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 05-01: Meeting minutes template engine
-- [ ] 05-02: Target system selection and adapter interfaces
-- [ ] 05-03: Google Sheets adapter (simplest first)
+- [ ] 05-01-PLAN.md — Output schemas, Jinja2 renderer, default templates (Wave 1)
+- [ ] 05-02-PLAN.md — OutputAdapter protocol, SheetsAdapter, DriveAdapter (Wave 2)
+- [ ] 05-03-PLAN.md — OutputRouter, retry queue, output API endpoint (Wave 3)
 
 ### Phase 6: System Integration
 **Goal**: Extracted artifacts flow to Smartsheet and owners receive notifications
@@ -180,7 +180,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | 2. Transcript Ingestion | 3/3 | Complete | 2026-01-18 |
 | 3. RAID Extraction | 4/4 | Complete | 2026-01-18 |
 | 4. Identity Resolution | 4/4 | Complete | 2026-01-18 |
-| 5. Output Generation | 0/3 | Not started | - |
+| 5. Output Generation | 0/3 | Planned | - |
 | 6. System Integration | 0/3 | Not started | - |
 | 7. Cross-Meeting Intelligence | 0/3 | Not started | - |
 | 8. Meeting Prep | 0/3 | Not started | - |
@@ -192,5 +192,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 *Phase 2 planned: 2025-01-17*
 *Phase 3 planned: 2026-01-18*
 *Phase 4 planned: 2026-01-18*
+*Phase 5 planned: 2026-01-18*
 *Total plans: 30*
 *Total v1 requirements: 26 (100% coverage)*
