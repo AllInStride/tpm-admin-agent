@@ -19,7 +19,10 @@ from src.events.types import (
     RiskExtracted,
     TranscriptParsed,
 )
+from src.repositories.open_items_repo import OpenItemsRepository
 from src.repositories.projection_repo import ProjectionRepository
+from src.search.duplicate_detector import DuplicateDetector
+from src.search.fts_service import FTSService
 from src.search.projections import ProjectionBuilder
 
 # Configure logging
@@ -87,9 +90,13 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     for event_type in event_types:
         event_bus.subscribe(event_type, projection_builder.handle_event_object)
 
-    logger.info(
-        f"Projection builder subscribed to {len(event_types)} event types"
-    )
+    logger.info(f"Projection builder subscribed to {len(event_types)} event types")
+
+    # Initialize search and dashboard services
+    app.state.fts_service = FTSService(db)
+    app.state.duplicate_detector = DuplicateDetector(db)
+    app.state.open_items_repo = OpenItemsRepository(db)
+    logger.info("Search and dashboard services initialized")
 
     yield
 
