@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2025-01-17)
 
 **Core value:** Convert meeting talk into tracked execution artifacts automatically — so TPMs shift from clerical work to strategic orchestration.
-**Current focus:** Phase 4 Complete - Ready for Phase 5 (Output Generation)
+**Current focus:** Phase 5 Plan 1 Complete - Schemas and Renderer
 
 ## Current Position
 
-Phase: 4 of 9 (Identity Resolution) - COMPLETE
-Plan: 4 of 4 in current phase
-Status: Phase verified and complete
-Last activity: 2026-01-18 - Phase 4 verification passed
+Phase: 5 of 9 (Output Generation)
+Plan: 1 of 4 in current phase
+Status: In progress
+Last activity: 2026-01-19 - Completed 05-01-PLAN.md
 
-Progress: [=====.....] 44%
+Progress: [=====.....] 48%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 11
-- Average duration: 4.0 min
-- Total execution time: 44 min
+- Total plans completed: 12
+- Average duration: 4.1 min
+- Total execution time: 49 min
 
 **By Phase:**
 
@@ -30,9 +30,10 @@ Progress: [=====.....] 44%
 | 02 | 3/3 | 11 min | 3.7 min |
 | 03 | 4/4 | 14 min | 3.5 min |
 | 04 | 4/4 | 19 min | 4.8 min |
+| 05 | 1/4 | 5 min | 5.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-01 (4 min), 04-02 (5 min), 04-03 (4 min), 04-04 (6 min)
+- Last 5 plans: 04-02 (5 min), 04-03 (4 min), 04-04 (6 min), 05-01 (5 min)
 - Trend: Stable execution pace
 
 *Updated after each plan completion*
@@ -76,6 +77,10 @@ Progress: [=====.....] 44%
 | 04-04 | Use users.lookupByEmail API for Slack | Direct email lookup is O(1), no need to enumerate users |
 | 04-04 | CalendarAdapter falls back to Sheets credentials | Reuse existing service account; same scopes often apply |
 | 04-04 | Verification adapters are optional | System works without Slack/Calendar; caps at 85% |
+| 05-01 | Role enum formatted as titlecase | Participant roles: host -> Host in attendee strings |
+| 05-01 | Autoescape for HTML templates only | Markdown templates unescaped for valid output |
+| 05-01 | Low confidence threshold at 0.7 | Matches extraction confidence threshold |
+| 05-01 | Next steps limited to 5 items | Per CONTEXT.md "top 3-5 actions" guidance |
 
 ### Pending Todos
 
@@ -85,42 +90,22 @@ None yet.
 
 None yet.
 
-## Phase 4 Complete
+## Phase 5 Progress
 
-Phase 4: Identity Resolution complete.
+Phase 5: Output Generation in progress.
 
-**Plan 04-01 complete:**
-- RapidFuzz installed for fuzzy matching
-- FuzzyMatcher with Jaro-Winkler token_sort_ratio
-- Multi-source confidence calculator
-- RosterEntry and ResolutionResult schemas
-- 20 new tests passing
+**Plan 05-01 complete:**
+- Jinja2 and tenacity dependencies added
+- MinutesContext, RenderedMinutes, RaidBundle schemas
+- MinutesRenderer with render(), render_markdown(), render_html()
+- Default templates with D-A-R-I section order
+- Low-confidence marking at 0.7 threshold
+- 23 new tests passing
 
-**Plan 04-02 complete:**
-- MappingRepository for learned mappings persistence
-- LLMMatcher for ambiguous name inference
-- IdentityResolver 4-stage pipeline (exact -> learned -> fuzzy -> LLM)
-- src/repositories/ module created
-- 20 new tests passing
-
-**Plan 04-03 complete:**
-- RosterAdapter for Google Sheets roster loading
-- gspread and google-auth dependencies added
-- Identity API endpoints: resolve, confirm, pending
-- Human-readable review summary generation
-- 29 new tests passing (17 adapter + 12 API)
-
-**Plan 04-04 complete:**
-- SlackAdapter for workspace member verification
-- CalendarAdapter for meeting attendee verification
-- Multi-source verification in IdentityResolver
-- slack-sdk and google-api-python-client dependencies
-- 32 new tests passing (10 Slack + 13 Calendar + 9 multi-source)
-
-**Test coverage:** 275 tests passing
+**Test coverage:** 298 tests passing
 
 ## Session Continuity
 
-Last session: 2026-01-18
-Stopped at: Phase 4 verified complete
+Last session: 2026-01-19
+Stopped at: Completed 05-01-PLAN.md
 Resume file: None
