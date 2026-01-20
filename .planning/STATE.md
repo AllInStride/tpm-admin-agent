@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2025-01-17)
 
 **Core value:** Convert meeting talk into tracked execution artifacts automatically — so TPMs shift from clerical work to strategic orchestration.
-**Current focus:** Phase 9 (Communication Automation) - In Progress
+**Current focus:** Phase 9 (Communication Automation) - Complete
 
 ## Current Position
 
 Phase: 9 of 9 (Communication Automation)
-Plan: 3 of 3 in current phase (all complete)
-Status: Phase complete
-Last activity: 2026-01-20 - Completed 09-02-PLAN.md
+Plan: 4 of 4 in current phase (all complete)
+Status: All phases complete
+Last activity: 2026-01-20 - Completed 09-04-PLAN.md
 
-Progress: [=========================] 100% (27/27 plans)
+Progress: [=========================] 100% (28/28 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 27
-- Average duration: 6.0 min
-- Total execution time: 161 min
+- Total plans completed: 28
+- Average duration: 5.9 min
+- Total execution time: 166 min
 
 **By Phase:**
 
@@ -34,10 +34,10 @@ Progress: [=========================] 100% (27/27 plans)
 | 06 | 3/3 | 20 min | 6.7 min |
 | 07 | 3/3 | 21 min | 7.0 min |
 | 08 | 3/3 | 30 min | 10.0 min |
-| 09 | 3/3 | 27 min | 9.0 min |
+| 09 | 4/4 | 32 min | 8.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 08-03 (8 min), 09-01 (7 min), 09-02 (13 min), 09-03 (7 min)
+- Last 5 plans: 09-01 (7 min), 09-02 (13 min), 09-03 (7 min), 09-04 (5 min)
 - Trend: Stable execution pace
 
 *Updated after each plan completion*
@@ -141,6 +141,9 @@ Progress: [=========================] 100% (27/27 plans)
 | 09-03 | Options formatted with A/B/C labels | Standard escalation format for clarity |
 | 09-03 | TalkingPointsGenerator logs warning for missing Q&A categories | LLM may have valid reason for omission; don't fail |
 | 09-03 | Escalation uses plain text for both outputs | Email format doesn't need markdown |
+| 09-04 | CommunicationService coordinates all generators with shared LLM client | Single entry point for all communication generation |
+| 09-04 | Talking points defaults to 30 days lookback | Reasonable default for project context gathering |
+| 09-04 | FastAPI dependency override pattern for tests | Enables clean mocking without import hacks |
 
 ### Pending Todos
 
@@ -152,7 +155,7 @@ None yet.
 
 ## Phase 9 Progress
 
-Phase 9: Communication Automation in progress.
+Phase 9: Communication Automation complete.
 
 **Plan 09-01 complete:**
 - StatusData dataclass for aggregated project data
@@ -175,10 +178,16 @@ Phase 9: Communication Automation in progress.
 - Validation: min 2 options, explicit deadline (escalation), Q&A category warnings (talking points)
 - talking_points.txt.j2 template added
 
-**Test coverage:** 733 tests passing
+**Plan 09-04 complete:**
+- CommunicationService orchestrating all four generators
+- REST API endpoints: exec-status, team-status, escalation, talking-points
+- GenerationResult with artifact, data_used, generated_at
+- App state integration in main.py lifespan
+
+**Test coverage:** 769 tests passing
 
 ## Session Continuity
 
-Last session: 2026-01-20T00:41:27Z
-Stopped at: Completed 09-02-PLAN.md (phase 9 complete)
+Last session: 2026-01-20T00:49:15Z
+Stopped at: Completed 09-04-PLAN.md (all phases complete)
 Resume file: None
