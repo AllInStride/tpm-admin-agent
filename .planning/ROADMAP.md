@@ -161,13 +161,13 @@ Plans:
   3. System generates escalation emails with facts, impact, and explicit ask
   4. System generates exec talking points for reviews
 
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 09-01: Exec status update generator
-- [ ] 09-02: Team status update generator
-- [ ] 09-03: Escalation email generator
-- [ ] 09-04: Exec talking points generator
+- [ ] 09-01-PLAN.md — Schemas, prompts, data aggregator, and templates (Wave 1)
+- [ ] 09-02-PLAN.md — ExecStatusGenerator and TeamStatusGenerator (Wave 2)
+- [ ] 09-03-PLAN.md — EscalationGenerator and TalkingPointsGenerator (Wave 2)
+- [ ] 09-04-PLAN.md — CommunicationService and API endpoints (Wave 3)
 
 ## Progress
 
@@ -184,7 +184,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | 6. System Integration | 3/3 | Complete | 2026-01-19 |
 | 7. Cross-Meeting Intelligence | 3/3 | Complete | 2026-01-19 |
 | 8. Meeting Prep | 3/3 | Complete | 2026-01-19 |
-| 9. Communication Automation | 0/4 | Not started | - |
+| 9. Communication Automation | 0/4 | Planned | - |
 
 ---
 *Roadmap created: 2025-01-17*
@@ -196,5 +196,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 *Phase 6 planned: 2026-01-19*
 *Phase 7 planned: 2026-01-19*
 *Phase 8 planned: 2026-01-19*
-*Total plans: 33*
+*Phase 9 planned: 2026-01-19*
+*Total plans: 30*
 *Total v1 requirements: 26 (100% coverage)*
