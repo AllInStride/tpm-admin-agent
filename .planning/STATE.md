@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2025-01-17)
 
 **Core value:** Convert meeting talk into tracked execution artifacts automatically — so TPMs shift from clerical work to strategic orchestration.
-**Current focus:** Phase 8 (Meeting Prep) - Complete
+**Current focus:** Phase 9 (Communication Automation) - In Progress
 
 ## Current Position
 
-Phase: 8 of 9 (Meeting Prep)
-Plan: 3 of 3 in current phase
-Status: Phase complete
-Last activity: 2026-01-19 - Completed 08-03-PLAN.md
+Phase: 9 of 9 (Communication Automation)
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-01-19 - Completed 09-01-PLAN.md
 
-Progress: [==========] 96%
+Progress: [=========================] 100% (24/24 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 23
-- Average duration: 5.5 min
-- Total execution time: 127 min
+- Total plans completed: 24
+- Average duration: 5.6 min
+- Total execution time: 134 min
 
 **By Phase:**
 
@@ -34,9 +34,10 @@ Progress: [==========] 96%
 | 06 | 3/3 | 20 min | 6.7 min |
 | 07 | 3/3 | 21 min | 7.0 min |
 | 08 | 3/3 | 30 min | 10.0 min |
+| 09 | 1/3 | 7 min | 7.0 min |
 
 **Recent Trend:**
-- Last 5 plans: 07-03 (8 min), 08-01 (9 min), 08-02 (13 min), 08-03 (8 min)
+- Last 5 plans: 08-01 (9 min), 08-02 (13 min), 08-03 (8 min), 09-01 (7 min)
 - Trend: Stable execution pace
 
 *Updated after each plan completion*
@@ -128,6 +129,10 @@ Progress: [==========] 96%
 | 08-03 | Duplicate prevention via _sent_preps set | In-memory tracking event_id:date keys |
 | 08-03 | AsyncExitStack for composable lifespan | Multiple lifespan contexts without deep nesting |
 | 08-03 | DISABLE_PREP_SCHEDULER env var | Test isolation without scheduler interference |
+| 09-01 | Blocker detection: overdue OR 'blocked' keyword | Two heuristics catch most blockers without complex logic |
+| 09-01 | Velocity = completed - new | Simple metric showing net progress |
+| 09-01 | Markdown + plain text template pairs | Flexibility for different delivery channels |
+| 09-01 | UTC dates for SQLite consistency in tests | SQLite date('now') returns UTC; must match |
 
 ### Pending Todos
 
@@ -137,37 +142,22 @@ None yet.
 
 None yet.
 
-## Phase 8 Complete
+## Phase 9 Progress
 
-Phase 8: Meeting Prep complete.
+Phase 9: Communication Automation in progress.
 
-**Plan 08-01 complete:**
-- PrepConfig, CalendarEvent, PrepItem, TalkingPoint, PrepSummary, MeetingPrepRequest schemas
-- CalendarAdapter.list_upcoming_events with asyncio.to_thread
-- ItemMatcher.get_items_for_prep with attendee+meeting filtering
-- prioritize_items: overdue > type > due_date sorting
-- generate_talking_points: heuristic suggestions
-- SlackAdapter.get_channel_history and send_prep_dm extensions
+**Plan 09-01 complete:**
+- StatusData dataclass for aggregated project data
+- ExecStatusOutput, TeamStatusOutput, EscalationOutput, TalkingPointsOutput schemas
+- GeneratedArtifact and EscalationRequest schemas
+- LLM prompts with context-first pattern for all four artifact types
+- DataAggregator for time-period queries with blocker/overdue detection
+- Six Jinja2 templates for markdown and plain text output
 
-**Plan 08-02 complete:**
-- DriveAdapter.search_project_docs for folder document search
-- ContextGatherer for parallel multi-source context aggregation
-- PrepContext dataclass for aggregated results
-- normalize_series_key for recurring meeting matching
-- Graceful degradation when adapters unavailable
-
-**Plan 08-03 complete:**
-- format_prep_blocks for scannable Block Kit messages
-- format_prep_text for plain text fallback
-- PrepService for orchestrating prep generation and delivery
-- APScheduler integration with 5-minute scan interval
-- API endpoints: POST /prep/trigger, POST /prep/scan, GET /prep/config, GET /prep/status
-- PrepService initialization and scheduler lifespan in main.py
-
-**Test coverage:** 663 tests passing
+**Test coverage:** 692 tests passing
 
 ## Session Continuity
 
-Last session: 2026-01-19T18:55:18Z
-Stopped at: Completed 08-03-PLAN.md
+Last session: 2026-01-20T00:25:55Z
+Stopped at: Completed 09-01-PLAN.md
 Resume file: None
