@@ -34,6 +34,41 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+async def _initialize_identity_service(app: FastAPI, db: TursoClient) -> None:
+    """Initialize identity resolution service with dependencies.
+
+    Creates RosterAdapter, FuzzyMatcher, MappingRepository, and
+    IdentityResolver, then sets up in app state.
+    """
+    from src.adapters.roster_adapter import RosterAdapter
+    from src.identity.fuzzy_matcher import FuzzyMatcher
+    from src.identity.resolver import IdentityResolver
+    from src.repositories.mapping_repo import MappingRepository
+
+    # Create RosterAdapter for Google Sheets roster loading
+    roster_adapter = RosterAdapter()
+
+    # Create FuzzyMatcher with default threshold
+    fuzzy_matcher = FuzzyMatcher()
+
+    # Create MappingRepository for learned name mappings
+    mapping_repo = MappingRepository(db)
+    await mapping_repo.initialize()
+
+    # Create IdentityResolver with dependencies
+    # Note: slack_adapter and calendar_adapter are optional per resolver.py:43-50
+    # Multi-source verification is already handled in prep_service
+    identity_resolver = IdentityResolver(
+        fuzzy_matcher=fuzzy_matcher,
+        mapping_repo=mapping_repo,
+    )
+
+    # Register in app state
+    app.state.roster_adapter = roster_adapter
+    app.state.identity_resolver = identity_resolver
+    logger.info("Identity service initialized")
+
+
 async def _initialize_communication_service(app: FastAPI, db: TursoClient) -> None:
     """Initialize CommunicationService with dependencies.
 
