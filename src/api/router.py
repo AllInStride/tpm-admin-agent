@@ -2,6 +2,7 @@
 
 from fastapi import APIRouter
 
+from src.api.communication import router as communication_router
 from src.api.extraction import router as extraction_router
 from src.api.health import router as health_router
 from src.api.identity import router as identity_router
@@ -26,3 +27,5 @@ api_router.include_router(integration_router)
 api_router.include_router(search_router)
 # Meeting prep endpoints
 api_router.include_router(prep_router)
+# Communication artifact generation endpoints
+api_router.include_router(communication_router)

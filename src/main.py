@@ -34,6 +34,34 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+async def _initialize_communication_service(app: FastAPI, db: TursoClient) -> None:
+    """Initialize CommunicationService with dependencies.
+
+    Creates DataAggregator and LLMClient, then sets up
+    CommunicationService in app state.
+    """
+    from src.communication.data_aggregator import DataAggregator
+    from src.communication.service import CommunicationService
+    from src.services.llm_client import LLMClient
+
+    # DataAggregator needs repositories
+    data_aggregator = DataAggregator(
+        open_items_repo=app.state.open_items_repo,
+        projection_repo=app.state.projection_repo,
+    )
+
+    # LLM client for structured extraction
+    llm_client = LLMClient()
+
+    # Create and register CommunicationService
+    communication_service = CommunicationService(
+        llm_client=llm_client,
+        data_aggregator=data_aggregator,
+    )
+    app.state.communication_service = communication_service
+    logger.info("CommunicationService initialized")
+
+
 async def _initialize_prep_service(app: FastAPI, db: TursoClient) -> None:
     """Initialize PrepService with adapters.
 
@@ -166,6 +194,9 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     app.state.duplicate_detector = DuplicateDetector(db)
     app.state.open_items_repo = OpenItemsRepository(db)
     logger.info("Search and dashboard services initialized")
+
+    # Initialize communication service
+    await _initialize_communication_service(app, db)
 
     # Initialize meeting prep service and scheduler
     async with AsyncExitStack() as stack:
