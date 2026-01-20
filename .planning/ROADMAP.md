@@ -19,6 +19,7 @@ This roadmap delivers a Meeting-to-Execution Agent that converts Zoom transcript
 - [x] **Phase 7: Cross-Meeting Intelligence** - Search past meetings and track open items
 - [x] **Phase 8: Meeting Prep** - Surface context and open items before meetings
 - [x] **Phase 9: Communication Automation** - Generate status updates, escalations, exec talking points
+- [ ] **Phase 10: Identity Service Wiring** - Wire identity services into main.py (gap closure)
 
 ## Phase Details
 
@@ -164,15 +165,29 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 09-01-PLAN.md — Schemas, prompts, data aggregator, and templates (Wave 1)
-- [ ] 09-02-PLAN.md — ExecStatusGenerator and TeamStatusGenerator (Wave 2)
-- [ ] 09-03-PLAN.md — EscalationGenerator and TalkingPointsGenerator (Wave 2)
-- [ ] 09-04-PLAN.md — CommunicationService and API endpoints (Wave 3)
+- [x] 09-01-PLAN.md — Schemas, prompts, data aggregator, and templates (Wave 1)
+- [x] 09-02-PLAN.md — ExecStatusGenerator and TeamStatusGenerator (Wave 2)
+- [x] 09-03-PLAN.md — EscalationGenerator and TalkingPointsGenerator (Wave 2)
+- [x] 09-04-PLAN.md — CommunicationService and API endpoints (Wave 3)
+
+### Phase 10: Identity Service Wiring
+**Goal**: Wire IdentityResolver and RosterAdapter into main.py so identity API endpoints work at runtime
+**Depends on**: Phase 4 (Identity Resolution)
+**Requirements**: None (gap closure for IDN-01 through IDN-04 runtime wiring)
+**Gap Closure**: Closes integration gaps from v1.0 audit
+**Success Criteria** (what must be TRUE):
+  1. IdentityResolver is initialized in main.py lifespan and assigned to app.state
+  2. RosterAdapter is initialized in main.py lifespan and assigned to app.state
+  3. `/identity/resolve` endpoint works at runtime (not just in mocked tests)
+**Plans**: 1 plan
+
+Plans:
+- [ ] 10-01-PLAN.md — Initialize identity services in main.py lifespan (Wave 1)
 
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
+Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 10
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -185,6 +200,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | 7. Cross-Meeting Intelligence | 3/3 | Complete | 2026-01-19 |
 | 8. Meeting Prep | 3/3 | Complete | 2026-01-19 |
 | 9. Communication Automation | 4/4 | Complete | 2026-01-19 |
+| 10. Identity Service Wiring | 0/1 | Planned | - |
 
 ---
 *Roadmap created: 2025-01-17*
@@ -197,5 +213,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 *Phase 7 planned: 2026-01-19*
 *Phase 8 planned: 2026-01-19*
 *Phase 9 planned: 2026-01-19*
-*Total plans: 30*
+*Phase 10 planned: 2026-01-19 (gap closure)*
+*Total plans: 31*
 *Total v1 requirements: 26 (100% coverage)*
