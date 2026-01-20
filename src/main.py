@@ -230,6 +230,9 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     app.state.open_items_repo = OpenItemsRepository(db)
     logger.info("Search and dashboard services initialized")
 
+    # Initialize identity service
+    await _initialize_identity_service(app, db)
+
     # Initialize communication service
     await _initialize_communication_service(app, db)
 
