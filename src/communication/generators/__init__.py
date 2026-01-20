@@ -7,8 +7,10 @@ Generators produce communication artifacts from input data:
 
 from src.communication.generators.base import BaseGenerator
 from src.communication.generators.escalation import EscalationGenerator
+from src.communication.generators.talking_points import TalkingPointsGenerator
 
 __all__ = [
     "BaseGenerator",
     "EscalationGenerator",
+    "TalkingPointsGenerator",
 ]
