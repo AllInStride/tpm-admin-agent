@@ -1,6 +1,6 @@
 """Tests for OpenItemsRepository."""
 
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 import pytest
@@ -74,32 +74,43 @@ async def seeded_repo(db_with_tables: TursoClient):
     """Create repo with test data seeded."""
     repo = OpenItemsRepository(db_with_tables)
 
-    # Today's date for relative date calculations
-    today = datetime.now().strftime("%Y-%m-%d")
-    yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-    tomorrow = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
-    next_week = (datetime.now() + timedelta(days=5)).strftime("%Y-%m-%d")
+    # Use UTC dates consistently with SQLite's date('now') which returns UTC
+    # Using larger offsets to avoid timezone edge cases
+
+    now_utc = datetime.now(UTC)
+    today = now_utc.strftime("%Y-%m-%d")
+    two_days_ago = (now_utc - timedelta(days=2)).strftime("%Y-%m-%d")
+    in_two_days = (now_utc + timedelta(days=2)).strftime("%Y-%m-%d")
+    in_five_days = (now_utc + timedelta(days=5)).strftime("%Y-%m-%d")
 
     # Insert test data
     test_items = [
-        # Overdue action
-        ("item-1", "meeting-1", "action", "Review PR", "Alice", yesterday, "pending"),
-        # Due today action
+        # Clearly overdue (2 days ago)
+        (
+            "item-1",
+            "meeting-1",
+            "action",
+            "Review PR",
+            "Alice",
+            two_days_ago,
+            "pending",
+        ),
+        # Due today
         ("item-2", "meeting-1", "action", "Deploy feature", "Bob", today, "pending"),
-        # Due this week
+        # Due this week (5 days)
         (
             "item-3",
             "meeting-2",
             "risk",
             "Security review",
             "Alice",
-            next_week,
+            in_five_days,
             "pending",
         ),
-        # Due tomorrow
-        ("item-4", "meeting-2", "issue", "Fix bug", "Charlie", tomorrow, "pending"),
+        # Due in 2 days (within week)
+        ("item-4", "meeting-2", "issue", "Fix bug", "Charlie", in_two_days, "pending"),
         # Completed (should not appear)
-        ("item-5", "meeting-1", "action", "Old task", "Bob", yesterday, "completed"),
+        ("item-5", "meeting-1", "action", "Old task", "Bob", two_days_ago, "completed"),
         # No due date
         ("item-6", "meeting-3", "decision", "Approve design", "Alice", None, "pending"),
     ]
