@@ -12,34 +12,37 @@ Convert meeting talk into tracked execution artifacts automatically — so TPMs 
 
 ### Validated
 
-(None yet — ship to validate)
+**v1.0 — Meeting → Execution Agent (shipped 2026-01-19):**
+- ✓ Ingest Zoom meeting transcripts (manual upload) — v1.0
+- ✓ Extract action items with owner, due date, description — v1.0
+- ✓ Extract decisions with context and rationale — v1.0
+- ✓ Extract risks with severity level — v1.0
+- ✓ Extract issues with status — v1.0
+- ✓ Resolve identity from names in transcript to project roster — v1.0
+- ✓ Generate meeting minutes from template — v1.0
+- ✓ Write extracted artifacts to Smartsheet — v1.0
+- ✓ Notify owners of assigned action items — v1.0
+- ✓ Search across past meeting content — v1.0
+- ✓ Track open items across multiple meetings — v1.0
+- ✓ Surface context before meetings start — v1.0
+- ✓ Draft status updates for different audiences — v1.0
+- ✓ Generate escalation emails with facts and ask — v1.0
+- ✓ Generate exec talking points — v1.0
 
 ### Active
 
-**v1 — Meeting → Execution Agent:**
-- [ ] Ingest Zoom meeting transcripts (manual upload initially)
-- [ ] Extract action items with owner, due date, description
-- [ ] Extract decisions with context and rationale
-- [ ] Extract risks with severity and mitigation notes
-- [ ] Extract issues with owner and status
-- [ ] Resolve identity from names in transcript to project roster
-- [ ] Generate meeting minutes from template
-- [ ] Write extracted artifacts to Smartsheet
-- [ ] Notify owners of assigned action items
-
-**v2 — Expanded Intelligence:**
-- [ ] Real-time context surfacing during meetings (Phase B)
+**v1.1 — Production Hardening (planned):**
+- [ ] Zoom webhook triggers processing automatically
+- [ ] Voice-to-identity learning improves over time
 - [ ] Proactive nudging: action items approaching due date
 - [ ] Proactive nudging: parked decisions not revisited
-- [ ] Proactive nudging: risks logged but not mitigated
-- [ ] Meeting prep: surface context before meetings start
-- [ ] Pattern detection across projects (common dependencies, recurring slips)
-- [ ] Stakeholder signal tracking: sentiment shifts, silence detection, escalation language
-- [ ] Capacity/load balancing: action item distribution across assignees
-- [ ] Decision amnesia prevention: surface past decisions when topics recur
-- [ ] Communication automation: draft status updates for different audiences
-- [ ] Communication automation: generate escalation emails with facts and ask
-- [ ] Communication automation: exec talking points
+
+**v2 — Expanded Intelligence (future):**
+- [ ] Real-time context surfacing during meetings
+- [ ] Pattern detection across projects
+- [ ] Stakeholder signal tracking
+- [ ] Capacity/load balancing
+- [ ] Decision amnesia prevention
 
 ### Out of Scope
 
@@ -123,11 +126,21 @@ Objects that flow through the system:
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Smartsheet as v1 target | Focus on one integration done well; Smartsheet is current system of record | — Pending |
-| Manual transcript upload for v1 | Reduces complexity; automation is a separate concern | — Pending |
-| Multi-agent architecture | Clean separation of concerns; agents testable independently | — Pending |
-| Canonical data model from day one | Enables future aggregation, rollups, and system swaps | — Pending |
-| Phase A (batch) before Phase B (real-time) | Different architectural beasts; learn from batch before streaming | — Pending |
+| Smartsheet as v1 target | Focus on one integration done well; Smartsheet is current system of record | ✓ Good — shipped with SmartsheetAdapter |
+| Manual transcript upload for v1 | Reduces complexity; automation is a separate concern | ✓ Good — POST /meetings/{id} endpoint |
+| Multi-agent architecture | Clean separation of concerns; agents testable independently | ✓ Good — adapters, services, repositories |
+| Canonical data model from day one | Enables future aggregation, rollups, and system swaps | ✓ Good — Meeting, ActionItem, Decision, Risk, Issue |
+| Phase A (batch) before Phase B (real-time) | Different architectural beasts; learn from batch before streaming | ✓ Good — batch complete, real-time is v2 |
+| Event-driven core | All processing flows through typed events | ✓ Good — EventBus, EventStore, projections |
+| FTS5 for search | SQLite full-text search for cross-meeting queries | ✓ Good — fast, no external dependencies |
+| APScheduler for prep | Lightweight scheduler for meeting prep automation | ✓ Good — 5-min scan interval works |
+
+## Current State
+
+**v1.0 shipped:** 2026-01-19
+**Codebase:** 12,435 LOC Python, 769 tests
+**Tech stack:** FastAPI, Turso (libSQL), Claude API, APScheduler
+**APIs:** 9 routers, 25+ endpoints
 
 ---
-*Last updated: 2025-01-17 after initialization*
+*Last updated: 2026-01-19 after v1.0 milestone*
