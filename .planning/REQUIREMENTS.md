@@ -49,10 +49,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Communication Automation
 
-- [ ] **COM-01**: System drafts status updates formatted for exec audience
-- [ ] **COM-02**: System drafts status updates formatted for team detail
-- [ ] **COM-03**: System generates escalation emails with facts, impact, and ask
-- [ ] **COM-04**: System generates exec talking points for reviews
+- [x] **COM-01**: System drafts status updates formatted for exec audience
+- [x] **COM-02**: System drafts status updates formatted for team detail
+- [x] **COM-03**: System generates escalation emails with facts, impact, and ask
+- [x] **COM-04**: System generates exec talking points for reviews
 
 ## v2 Requirements
 
@@ -129,10 +129,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PRP-01 | Phase 8 | Complete |
 | PRP-02 | Phase 8 | Complete |
 | PRP-03 | Phase 8 | Complete |
-| COM-01 | Phase 9 | Pending |
-| COM-02 | Phase 9 | Pending |
-| COM-03 | Phase 9 | Pending |
-| COM-04 | Phase 9 | Pending |
+| COM-01 | Phase 9 | Complete |
+| COM-02 | Phase 9 | Complete |
+| COM-03 | Phase 9 | Complete |
+| COM-04 | Phase 9 | Complete |
 
 **Coverage:**
 - v1 requirements: 26 total
@@ -141,4 +141,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2025-01-17*
-*Last updated: 2026-01-19 after Phase 8 completion*
+*Last updated: 2026-01-19 after Phase 9 completion*

@@ -18,7 +18,7 @@ This roadmap delivers a Meeting-to-Execution Agent that converts Zoom transcript
 - [x] **Phase 6: System Integration** - Write artifacts to Smartsheet and notify owners
 - [x] **Phase 7: Cross-Meeting Intelligence** - Search past meetings and track open items
 - [x] **Phase 8: Meeting Prep** - Surface context and open items before meetings
-- [ ] **Phase 9: Communication Automation** - Generate status updates, escalations, exec talking points
+- [x] **Phase 9: Communication Automation** - Generate status updates, escalations, exec talking points
 
 ## Phase Details
 
@@ -184,7 +184,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> ... -> 9
 | 6. System Integration | 3/3 | Complete | 2026-01-19 |
 | 7. Cross-Meeting Intelligence | 3/3 | Complete | 2026-01-19 |
 | 8. Meeting Prep | 3/3 | Complete | 2026-01-19 |
-| 9. Communication Automation | 0/4 | Planned | - |
+| 9. Communication Automation | 4/4 | Complete | 2026-01-19 |
 
 ---
 *Roadmap created: 2025-01-17*
