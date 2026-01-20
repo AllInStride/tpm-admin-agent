@@ -1,0 +1,54 @@
+# Team Status: {{ project_name }}
+
+**Period:** {{ period_start }} - {{ period_end }}
+
+## Summary
+
+{{ summary }}
+
+{% if completed_items %}
+## Completed This Period
+
+| Item | Owner | Completed |
+|------|-------|-----------|
+{% for item in completed_items %}
+| {{ item.description }} | {{ item.owner | default('Unassigned') }} | {{ item.completed_date | default('-') }} |
+{% endfor %}
+{% endif %}
+
+{% if open_items %}
+## Open Items
+
+| Item | Owner | Due | Status |
+|------|-------|-----|--------|
+{% for item in open_items %}
+| {{ item.description }} | {{ item.owner | default('Unassigned') }} | {{ item.due_date | default('-') }} | {{ item.status | default('pending') }} |
+{% endfor %}
+{% endif %}
+
+{% if decisions %}
+## Decisions Made
+
+{% for decision in decisions %}
+- {{ decision }}
+{% endfor %}
+{% endif %}
+
+{% if risks %}
+## Active Risks
+
+{% for risk in risks %}
+- {{ risk }}
+{% endfor %}
+{% endif %}
+
+{% if issues %}
+## Open Issues
+
+{% for issue in issues %}
+- {{ issue }}
+{% endfor %}
+{% endif %}
+
+---
+*Generated: {{ generated_at }}*

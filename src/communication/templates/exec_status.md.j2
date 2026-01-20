@@ -1,0 +1,61 @@
+# Status Update: {{ project_name }}
+
+**Period:** {{ period_start }} - {{ period_end }}
+**Overall Status:** {{ overall_rag }}
+
+## RAG Breakdown
+
+| Dimension | Status |
+|-----------|--------|
+| Scope | {{ scope_rag }} |
+| Schedule | {{ schedule_rag }} |
+| Risk | {{ risk_rag }} |
+
+## Summary
+
+{{ summary }}
+
+## Key Progress
+
+{% for item in key_progress %}
+- {{ item }}
+{% endfor %}
+
+{% if key_decisions %}
+## Decisions Made
+
+{% for decision in key_decisions %}
+- {{ decision }}
+{% endfor %}
+{% endif %}
+
+{% if blockers %}
+## Blockers (Action Required)
+
+{% for blocker in blockers %}
+### {{ blocker.title }}
+
+{{ blocker.problem }}
+
+**Ask:** {{ blocker.ask }}
+
+{% endfor %}
+{% endif %}
+
+{% if risks %}
+## Active Risks
+
+{% for risk in risks %}
+- {{ risk }}
+{% endfor %}
+{% endif %}
+
+## Next Period
+
+{% for item in next_period %}
+- {{ item }}
+{% endfor %}
+
+---
+*Generated: {{ generated_at }}*
+{% if source_meetings %}*Source meetings: {{ source_meetings | join(', ') }}*{% endif %}

@@ -1,0 +1,58 @@
+STATUS UPDATE: {{ project_name }}
+{{ '=' * (16 + project_name|length) }}
+
+Period: {{ period_start }} - {{ period_end }}
+Overall Status: {{ overall_rag }}
+
+RAG BREAKDOWN
+-------------
+Scope: {{ scope_rag }}
+Schedule: {{ schedule_rag }}
+Risk: {{ risk_rag }}
+
+SUMMARY
+-------
+{{ summary }}
+
+KEY PROGRESS
+------------
+{% for item in key_progress %}
+* {{ item }}
+{% endfor %}
+
+{% if key_decisions %}
+DECISIONS MADE
+--------------
+{% for decision in key_decisions %}
+* {{ decision }}
+{% endfor %}
+{% endif %}
+
+{% if blockers %}
+BLOCKERS (ACTION REQUIRED)
+--------------------------
+{% for blocker in blockers %}
+{{ blocker.title }}
+{{ blocker.problem }}
+ASK: {{ blocker.ask }}
+
+{% endfor %}
+{% endif %}
+
+{% if risks %}
+ACTIVE RISKS
+------------
+{% for risk in risks %}
+* {{ risk }}
+{% endfor %}
+{% endif %}
+
+NEXT PERIOD
+-----------
+{% for item in next_period %}
+* {{ item }}
+{% endfor %}
+
+---
+Generated: {{ generated_at }}
+{% if source_meetings %}Source meetings: {{ source_meetings | join(', ') }}{% endif %}

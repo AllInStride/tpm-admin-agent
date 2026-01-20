@@ -1,0 +1,53 @@
+# Talking Points: {{ project_name }}
+
+**Meeting Type:** {{ meeting_type | default('Executive Review') }}
+
+## Narrative Summary
+
+{{ narrative_summary }}
+
+## Key Talking Points
+
+{% for point in key_points %}
+{{ loop.index }}. {{ point }}
+{% endfor %}
+
+## Anticipated Q&A
+
+{% set risk_questions = anticipated_qa | selectattr('category', 'equalto', 'risk') | list %}
+{% set resource_questions = anticipated_qa | selectattr('category', 'equalto', 'resource') | list %}
+{% set other_questions = anticipated_qa | rejectattr('category', 'in', ['risk', 'resource']) | list %}
+
+{% if risk_questions %}
+### Risk/Concern Questions
+
+{% for qa in risk_questions %}
+**Q: {{ qa.question }}**
+A: {{ qa.answer }}
+
+{% endfor %}
+{% endif %}
+
+{% if resource_questions %}
+### Resource Questions
+
+{% for qa in resource_questions %}
+**Q: {{ qa.question }}**
+A: {{ qa.answer }}
+
+{% endfor %}
+{% endif %}
+
+{% if other_questions %}
+### Other Questions
+
+{% for qa in other_questions %}
+**Q: {{ qa.question }}**
+A: {{ qa.answer }}
+
+{% endfor %}
+{% endif %}
+
+---
+*Generated: {{ generated_at }}*
+*Prepared for: {{ meeting_type | default('Executive Review') }}*
